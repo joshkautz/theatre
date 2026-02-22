@@ -169,12 +169,49 @@ const Left: React.VFC<{
     setIsDragOver(true)
   }, [])
 
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    if (!containerRef.current?.contains(e.relatedTarget as Node)) {
+      setIsDragOver(false)
+    }
+  }, [])
+
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault()
       e.stopPropagation()
       setIsDragOver(false)
 
+      // Handle audio file drops
+      const audioFiles = Array.from(e.dataTransfer.files).filter(
+        (f) =>
+          f.type.startsWith('audio/') ||
+          /\.(mp3|wav|ogg|aac|flac|m4a)$/i.test(f.name),
+      )
+      if (audioFiles.length > 0) {
+        const sheet = val(layoutP.sheet)
+        const publicSheet = sheet.project.publicApi.sheet(sheet.address.sheetId)
+        const sequence = publicSheet.sequence
+        const startTime = sheet.getSequence().position
+        for (const audioFile of audioFiles) {
+          const audioSource = URL.createObjectURL(audioFile)
+          sequence
+            .attachAudio({
+              source: audioSource,
+              startTime,
+              label: audioFile.name,
+            })
+            .then(() => {
+              setTimeout(() => URL.revokeObjectURL(audioSource), 5000)
+            })
+            .catch((err: unknown) => {
+              console.error('Failed to attach dropped audio:', err)
+              URL.revokeObjectURL(audioSource)
+            })
+        }
+        return
+      }
+
+      // Handle theatre-sheet drops (sub-sequences)
       try {
         const data = e.dataTransfer.getData('application/json')
         if (!data) return
@@ -200,7 +237,7 @@ const Left: React.VFC<{
         console.error('Error handling drop:', error)
       }
     },
-    [addSubSequencePopover],
+    [addSubSequencePopover, layoutP],
   )
 
   const {scrollTop, clientHeight} = useVal(scrollStateP)
@@ -255,6 +292,7 @@ const Left: React.VFC<{
           }}
           className={isDragOver ? 'drop-target' : ''}
           onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
           <ReorderProvider>
@@ -339,6 +377,7 @@ const Left: React.VFC<{
     isDragOver,
     droppedData,
     handleDragOver,
+    handleDragLeave,
     handleDrop,
     addSubSequencePopover.node,
     scrollTop,
