@@ -1,5 +1,137 @@
 # Theatre.js changelog
 
+## 1.0.25
+
+* Bug fixes
+  * Audio track colors now stored to localStorage
+  * Fixed drag & drop of audio files into the Sequence Editor
+
+## 1.0.24
+
+* New features
+  * Extended audio support: multi-track audio example added
+  * Audio tracks can be saved to JSON with labels
+
+## 1.0.23
+
+* New features
+  * Audio tracks now support multiple attachments with an editor view
+  * Audio visualized inside the Sequence Editor
+  * Audio start time configurable
+  * Audio tracks are orderable
+
+## 1.0.22
+
+* New features
+  * Object reordering in the editor
+  * Extension panes support optional size and position
+
+## 1.0.21
+
+* Bug fixes
+  * TypeScript linting fixes
+  * Grid line opacity corrected
+  * Analysis value clamping fixed
+* Improvements
+  * Data panel renamed with minor aesthetic changes
+
+## 1.0.20 (feat/editor-updates)
+
+* New features
+  * Object reordering added to the outline panel
+  * Extension panes now support optional size and position
+
+## 1.0.19
+
+* New features
+  * Sequence popup added to the Sequence Editor
+  * Easy keyframe copy/paste
+* Bug fixes
+  * SequenceEditor splitter drag clamped to valid range
+  * Scrolling performance improved
+  * Randomize color fixed on track bar
+  * Fixed dragging behaviour in collapsed state
+
+## 1.0.18
+
+* Bug fixes
+  * Sequence Editor resize improvements (resizable left panel fixes)
+
+## 1.0.17
+
+* Bug fixes
+  * Sequence Editor left panel is now resizable
+  * Left collapsed scroll margin added
+
+## 1.0.16
+
+* Bug fixes
+  * Internal logging removed and replaced with correct logic
+
+## 1.0.15
+
+* New features
+  * Subsequences added to sequences
+  * DopeSheet context menu added
+* Bug fixes
+  * DetailsPanel removed from Sequence Editor
+  * CSS flexbox fix
+  * TypeScript linting fixes
+
+## 1.0.14
+
+* Bug fixes
+  * Collapsed state minimum size updated
+
+## 1.0.12
+
+* New features
+  * Sequence Editor improvements
+* Bug fixes
+  * Editor selections fixed
+  * Sequence playhead repositions correctly on stop
+
+## 1.0.11
+
+* New features
+  * Audio attachment and visualizer added
+* Bug fixes
+  * Events markers no longer overlap other markers
+  * Log output removed
+* Improvements
+  * `theatric` package renamed to `@tomorrowevening/theatric`
+  * Enhanced SVG Viewer and NPM publishing improvements
+
+## 1.0.8
+
+* New features
+  * Events added to sequences
+  * Searchable properties and objects
+* Bug fixes
+  * Marker state syncing fixed
+  * Default range now based on sequence duration
+  * TypeScript and ESLint errors resolved
+
+## 1.0.0
+
+* Rebrand to `@tomorrowevening` scope
+* New features
+  * SVG Viewer with view toggle (persisted to localStorage)
+  * Sequence marker save/load and navigation API
+  * Z-order support for extension panes
+  * Sheets added to Sequence Editor menu
+  * Editable time, duration, and FPS inputs in sequence header
+  * Frame counter in sequence header
+  * RGBA swatches shown for all colour properties
+  * Sequence Editor horizontal scrollbar enlarged
+* Bug fixes
+  * Overlapping pane-extensions fixed
+  * Graph editor visibility corrected
+  * Editor shows animation data when available
+  * CSS and TypeScript minor fixes
+
+---
+
 ## 0.4.5
 
 * New features
