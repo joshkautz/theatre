@@ -65,40 +65,20 @@ export async function createBundles(watch: boolean) {
       format: 'cjs',
     })
 
+    const esmCtx = await esbuild.context({
+      ...esbuildConfig,
+      outfile: path.join(pathToPackage, 'dist/index.mjs'),
+      format: 'esm',
+    })
+
     if (watch) {
       await ctx.watch()
+      await esmCtx.watch()
     } else {
       await ctx.rebuild()
       await ctx.dispose()
+      await esmCtx.rebuild()
+      await esmCtx.dispose()
     }
-
-    /**
-     * @remarks
-     * I just disabled ESM builds because I couldn't get them to work
-     * with create-react-app which uses webpack v4. I'm sure that's fixable,
-     * but not worth the hassle right now. There is not much to tree-shake
-     * in \@tomorrowevening/theatre-core as we've done all the tree-shaking pre-bundle already.
-     */
-
-    // build({
-    //   ...esbuildConfig,
-    //   outfile: path.join(pathToPackage, 'dist/index.mjs'),
-    //   format: 'esm',
-    // })
-
-    // build({
-    //   ...esbuildConfig,
-    //   outfile: path.join(pathToPackage, 'dist/index.min.js'),
-    //   format: 'iife',
-    //   external: [],
-    //   minify: true,
-    //   globalName: `Theatre.${which}`,
-    //   legalComments: 'external',
-    //   platform: 'browser',
-    //   define: {
-    //     ...definedGlobals,
-    //     'process.env.NODE_ENV': JSON.stringify('production'),
-    //   },
-    // })
   }
 }
