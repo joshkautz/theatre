@@ -1,5 +1,12 @@
 # Theatre.js changelog
 
+## 1.0.26
+
+* Improvements
+  * ESM build (`dist/index.mjs`) added for `theatre-core` and `theatre-studio`
+  * `exports` and `module` fields added to package manifests for proper ESM resolution
+  * Fixes Bun bundler compatibility — `import studio from '@tomorrowevening/theatre-studio'` now resolves the native ESM file, bypassing `__esModule` interop issues
+
 ## 1.0.25
 
 * Bug fixes
