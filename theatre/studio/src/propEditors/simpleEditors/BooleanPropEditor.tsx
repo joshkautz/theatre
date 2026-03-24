@@ -19,7 +19,8 @@ const Container = styled.div<{isChecked: boolean}>`
     display: block;
     content: ' ';
     background-color: transparent;
-    border: 1px solid transparent;
+    border: 1px solid
+      ${({isChecked}) => (isChecked ? 'transparent' : '#00000059')};
     z-index: -2;
     box-sizing: border-box;
     border-radius: 1px;
