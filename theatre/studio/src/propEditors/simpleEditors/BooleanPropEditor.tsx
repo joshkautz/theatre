@@ -66,10 +66,13 @@ const Input = styled.input.attrs({type: 'checkbox'})`
   &:checked::after {
     content: '';
     position: absolute;
-    left: 7px;
-    top: 2px;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 6px;
     height: 12px;
+    margin: auto;
     border: solid rgba(255, 255, 255, 0.9);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
@@ -87,8 +90,16 @@ function BooleanPropEditor({
     [editingTools],
   )
 
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    e.stopPropagation()
+  }, [])
+
   return (
-    <Container isChecked={value} className={value ? 'checked' : ''}>
+    <Container
+      isChecked={value}
+      className={value ? 'checked' : ''}
+      onPointerDown={onPointerDown}
+    >
       <Input checked={value} onChange={onChange} />
       <FillIndicator isChecked={value} />
     </Container>
