@@ -1,11 +1,11 @@
 import type {PropTypeConfig_Boolean} from '@tomorrowevening/theatre-core/propTypes'
-import React, {useCallback} from 'react'
+import React, {useCallback, useEffect, useRef} from 'react'
 import styled from 'styled-components'
 import type {ISimplePropEditorReactProps} from './ISimplePropEditorReactProps'
 
 const Container = styled.div<{isChecked: boolean}>`
-  height: 28px;
-  width: 28px;
+  height: 100%;
+  width: 24px;
   flex-shrink: 0;
   position: relative;
   z-index: 0;
@@ -84,21 +84,38 @@ function BooleanPropEditor({
 }: ISimplePropEditorReactProps<PropTypeConfig_Boolean>) {
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      editingTools.permanentlySetValue(e.target.checked)
+      const newValue = e.target.checked
+      // Create a scrub so the change is undoable via Ctrl+Z.
+      // permanentlySetValue alone uses a transaction which is not undoable.
+      editingTools.temporarilySetValue(newValue)
+      editingTools.permanentlySetValue(newValue)
+      // Blur so the checkbox doesn't capture Ctrl+Z (the browser's native
+      // input undo) — let it propagate to Theatre.js's undo handler instead.
+      e.target.blur()
     },
     [editingTools],
   )
 
-  const onMouseDown = useCallback((e: React.MouseEvent) => {
-    // Stop the native event from reaching parent useDrag listeners
-    e.nativeEvent.stopImmediatePropagation()
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Use a native mousedown listener to stop the event before it reaches
+  // the parent row's useDrag handler (which also uses a native listener).
+  // React synthetic events fire too late to prevent this.
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const handler = (e: MouseEvent) => {
+      e.stopPropagation()
+    }
+    el.addEventListener('mousedown', handler)
+    return () => el.removeEventListener('mousedown', handler)
   }, [])
 
   return (
     <Container
+      ref={containerRef}
       isChecked={value}
       className={value ? 'checked' : ''}
-      onMouseDown={onMouseDown}
     >
       <Input checked={value} onChange={onChange} />
       <FillIndicator isChecked={value} />
