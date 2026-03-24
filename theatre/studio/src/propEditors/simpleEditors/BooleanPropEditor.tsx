@@ -70,8 +70,8 @@ const Input = styled.input.attrs({type: 'checkbox'})`
     height: 12px;
     left: 50%;
     top: 50%;
-    margin-left: -3px;
-    margin-top: -8px;
+    margin-left: -4px;
+    margin-top: -9px;
     border: solid rgba(255, 255, 255, 0.9);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
@@ -89,17 +89,16 @@ function BooleanPropEditor({
     [editingTools],
   )
 
-  const stopPropagation = useCallback((e: React.SyntheticEvent) => {
-    e.stopPropagation()
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    // Stop the native event from reaching parent useDrag listeners
+    e.nativeEvent.stopImmediatePropagation()
   }, [])
 
   return (
     <Container
       isChecked={value}
       className={value ? 'checked' : ''}
-      onPointerDown={stopPropagation}
-      onMouseDown={stopPropagation}
-      onDragStart={stopPropagation}
+      onMouseDown={onMouseDown}
     >
       <Input checked={value} onChange={onChange} />
       <FillIndicator isChecked={value} />
