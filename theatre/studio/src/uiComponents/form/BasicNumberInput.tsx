@@ -45,6 +45,7 @@ const Input = styled.input`
   border: 1px solid transparent;
   color: rgba(255, 255, 255, 0.9);
   padding: 1px 6px;
+  box-sizing: border-box;
   font: inherit;
   outline: none;
   cursor: ew-resize;
@@ -60,9 +61,8 @@ const Input = styled.input`
 
 const FillIndicator = styled.div`
   position: absolute;
-  inset: 3px 2px 4px;
-  transform: scale(var(--percentage), 1);
-  transform-origin: top left;
+  inset: 3px auto 4px 2px;
+  width: calc(var(--percentage) * 100%);
   background-color: #2d5561;
   z-index: -1;
   border-radius: 2px;
@@ -321,6 +321,7 @@ const BasicNumberInput: React.FC<{
         e.stopPropagation()
       }}
       autoFocus={propsA.autoFocus}
+      style={{paddingLeft: 8, paddingBottom: 3}}
     />
   )
 
