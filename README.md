@@ -24,6 +24,26 @@ Theatre.js can be used both programmatically _and_ visually.
 
 ---
 
+## Changes to this fork
+
+This repository is a fork of the original [TheatreJS](https://github.com/theatre-js/theatre). The [CHANGELOG.md](CHANGELOG.md) file documents modifications and updates that have been made by this fork's maintainers, which are not part of the official source.
+
+Please note that these changes represent unofficial updates and may diverge from the future developments of the original repository. For the most up-to-date and officially supported version, refer to the [TheatreJS](https://github.com/theatre-js/theatre).
+
+## GUI
+
+![GUI](studio.png)
+
+### Big changes
+
+- Details Panel removed
+- Outline Panel removed Sheet Objects, shown in Sequence Editor (saves space)
+- Events added to Sequences
+- Multiple audio files can be added to sequences
+- Many UX changes + features to Sequence Editor
+
+---
+
 You can use Theatre.js to:
 
 - Animate 3D objects made with THREE.js or other 3D libraries
