@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import type {ISimplePropEditorReactProps} from './ISimplePropEditorReactProps'
 
 const Container = styled.div<{isChecked: boolean}>`
-  height: 100%;
-  width: 26px;
+  height: 30px;
+  width: 30px;
   flex-shrink: 0;
   position: relative;
   z-index: 0;
@@ -25,8 +25,7 @@ const Container = styled.div<{isChecked: boolean}>`
     border-radius: 1px;
   }
 
-  &:hover,
-  &.checked {
+  &:hover {
     &:after {
       background-color: #10101042;
       border-color: #00000059;
