@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import type {ISimplePropEditorReactProps} from './ISimplePropEditorReactProps'
 
 const Container = styled.div<{isChecked: boolean}>`
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  width: 28px;
   flex-shrink: 0;
   position: relative;
   z-index: 0;
@@ -15,7 +15,7 @@ const Container = styled.div<{isChecked: boolean}>`
 
   &:after {
     position: absolute;
-    inset: 1px 0 2px;
+    inset: 1px;
     display: block;
     content: ' ';
     background-color: transparent;
@@ -36,7 +36,7 @@ const Container = styled.div<{isChecked: boolean}>`
 
 const FillIndicator = styled.div<{isChecked: boolean}>`
   position: absolute;
-  inset: 3px 2px 4px;
+  inset: 3px;
   transform: scale(${({isChecked}) => (isChecked ? 1 : 0)});
   transform-origin: center;
   background-color: #2d5561;
@@ -59,7 +59,7 @@ const Input = styled.input.attrs({type: 'checkbox'})`
   outline: none;
   cursor: pointer;
   width: 100%;
-  height: calc(100% - 4px);
+  height: 100%;
   border-radius: 2px;
   position: relative;
 
