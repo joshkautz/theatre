@@ -113,7 +113,10 @@ const defaultEditableFactoryConfig = {
     icon: 'lightBulb' as const,
   },
   perspectiveCamera: extendObjectProps(baseCameraConfig, {
-    fov: createNumberPropConfig('fov', 50, {nudgeMultiplier: 0.1}),
+    fov: createNumberPropConfig('fov', 50, {
+      nudgeMultiplier: 0.1,
+      label: 'FOV',
+    }),
     zoom: createNumberPropConfig('zoom', 1),
   }),
   orthographicCamera: baseCameraConfig,

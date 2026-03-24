@@ -26,6 +26,9 @@ export type EditableFactoryConfig = Partial<
   Record<keyof JSX.IntrinsicElements, ObjectConfig<any>>
 >
 
+const capitalize = (s: string): string =>
+  s.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase())
+
 type Vector3 = {
   x: number
   y: number
@@ -102,18 +105,24 @@ To fix this, make sure the prop is set to either a number, an array of numbers, 
     object[key].set(value.x, value.y, value.z)
   },
   type: {
-    [key]: {
-      x: types.number(defaultValue.x, {nudgeMultiplier}),
-      y: types.number(defaultValue.y, {nudgeMultiplier}),
-      z: types.number(defaultValue.z, {nudgeMultiplier}),
-    },
+    [key]: types.compound(
+      {
+        x: types.number(defaultValue.x, {nudgeMultiplier, label: 'X'}),
+        y: types.number(defaultValue.y, {nudgeMultiplier, label: 'Y'}),
+        z: types.number(defaultValue.z, {nudgeMultiplier, label: 'Z'}),
+      },
+      {label: capitalize(key)},
+    ),
   },
 })
 
 export const createNumberPropConfig = (
   key: string,
   defaultValue: number = 0,
-  {nudgeMultiplier = 0.01} = {},
+  {
+    nudgeMultiplier = 0.01,
+    label,
+  }: {nudgeMultiplier?: number; label?: string} = {},
 ): PropConfig<number> => ({
   parse: (props) => {
     return props[key] ?? defaultValue
@@ -122,7 +131,10 @@ export const createNumberPropConfig = (
     object[key] = value
   },
   type: {
-    [key]: types.number(defaultValue, {nudgeMultiplier}),
+    [key]: types.number(defaultValue, {
+      nudgeMultiplier,
+      label: label ?? capitalize(key),
+    }),
   },
 })
 
@@ -144,7 +156,7 @@ export const createColorPropConfig = (
     object[key].setRGB(value.r, value.g, value.b)
   },
   type: {
-    [key]: types.rgba({...defaultValue, a: 1}),
+    [key]: types.rgba({...defaultValue, a: 1}, {label: capitalize(key)}),
   },
 })
 
