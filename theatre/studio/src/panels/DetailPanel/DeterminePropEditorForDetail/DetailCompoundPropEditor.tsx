@@ -174,7 +174,9 @@ function DetailCompoundPropEditor<
 }: ICompoundPropDetailEditorProps<TPropTypeConfig>) {
   const propName = propConfig.label ?? last(getPointerParts(pointerToProp).path)
 
-  const allSubs = Object.entries(propConfig.props)
+  const allSubs = Object.entries(propConfig.props).filter(
+    ([_, conf]) => !conf.hidden,
+  )
   const compositeSubs = allSubs.filter(([_, conf]) =>
     isPropConfigComposite(conf),
   )

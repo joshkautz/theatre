@@ -428,6 +428,7 @@ export const calculateSequenceEditorTree = (
     parentSheetItemKey: StudioSheetItemKey,
   ) {
     for (const [propKey, propConfig] of Object.entries(propsConfig)) {
+      if (propConfig.hidden) continue
       const trackOrMapping = trackSetups[propKey]
       addProp(
         sheetObject,

@@ -1,4 +1,7 @@
-import type {$FixMe, $IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
+import type {
+  $FixMe,
+  $IntentionalAny,
+} from '@tomorrowevening/theatre-shared/utils/types'
 import userReadableTypeOfValue from '@tomorrowevening/theatre-shared/utils/userReadableTypeOfValue'
 import type {Rgba} from '@tomorrowevening/theatre-shared/utils/color'
 import {
@@ -105,6 +108,7 @@ export const compound = <Props extends UnknownShorthandCompoundProps>(
     valueType: null as $IntentionalAny,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
+    hidden: opts.hidden,
     default: mapValues(sanitizedProps, (p) => p.default) as $IntentionalAny,
     deserializeAndSanitize: (json: unknown) => {
       if (typeof json !== 'object' || !json) return undefined
@@ -160,6 +164,7 @@ export const file = (
   defaultValue: File['id'],
   opts: {
     label?: string
+    hidden?: boolean
     interpolate?: Interpolator<File['id']>
   } = {},
 ): PropTypeConfig_File => {
@@ -182,6 +187,7 @@ export const file = (
     valueType: null as $IntentionalAny,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
+    hidden: opts.hidden,
     interpolate,
     deserializeAndSanitize: _ensureFile,
   }
@@ -228,6 +234,7 @@ export const image = (
   defaultValue: Asset['id'],
   opts: {
     label?: string
+    hidden?: boolean
     interpolate?: Interpolator<Asset['id']>
   } = {},
 ): PropTypeConfig_Image => {
@@ -250,6 +257,7 @@ export const image = (
     valueType: null as $IntentionalAny,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
+    hidden: opts.hidden,
     interpolate,
     deserializeAndSanitize: _ensureImage,
   }
@@ -322,6 +330,7 @@ export const number = (
     range?: PropTypeConfig_Number['range']
     nudgeMultiplier?: number
     label?: string
+    hidden?: boolean
   } = {},
 ): PropTypeConfig_Number => {
   if (process.env.NODE_ENV !== 'production') {
@@ -391,6 +400,7 @@ export const number = (
     [propTypeSymbol]: 'TheatrePropType',
     ...(opts ? opts : {}),
     label: opts.label,
+    hidden: opts.hidden,
     nudgeFn: opts.nudgeFn ?? defaultNumberNudgeFn,
     nudgeMultiplier:
       typeof opts.nudgeMultiplier === 'number'
@@ -464,6 +474,7 @@ export const rgba = (
     default: decorateRgba(sanitized as Rgba),
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
+    hidden: opts.hidden,
     interpolate: _interpolateRgba,
     deserializeAndSanitize: _sanitizeRgba,
   }
@@ -539,6 +550,7 @@ export const boolean = (
   defaultValue: boolean,
   opts: {
     label?: string
+    hidden?: boolean
     interpolate?: Interpolator<boolean>
   } = {},
 ): PropTypeConfig_Boolean => {
@@ -559,6 +571,7 @@ export const boolean = (
     valueType: null as $IntentionalAny,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
+    hidden: opts.hidden,
     interpolate: opts.interpolate ?? leftInterpolate,
     deserializeAndSanitize: _ensureBoolean,
   }
@@ -597,6 +610,7 @@ export const string = (
   defaultValue: string,
   opts: {
     label?: string
+    hidden?: boolean
     interpolate?: Interpolator<string>
   } = {},
 ): PropTypeConfig_String => {
@@ -616,6 +630,7 @@ export const string = (
     valueType: null as $IntentionalAny,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
+    hidden: opts.hidden,
     interpolate: opts.interpolate ?? leftInterpolate,
     deserializeAndSanitize: _ensureString,
   }
@@ -664,6 +679,7 @@ export function stringLiteral<
   opts: {
     as?: 'menu' | 'switch'
     label?: string
+    hidden?: boolean
     interpolate?: Interpolator<Extract<keyof ValuesAndLabels, string>>
   } = {},
 ): PropTypeConfig_StringLiteral<Extract<keyof ValuesAndLabels, string>> {
@@ -675,6 +691,7 @@ export function stringLiteral<
     valueType: null as $IntentionalAny,
     as: opts.as ?? 'menu',
     label: opts.label,
+    hidden: opts.hidden,
     interpolate: opts.interpolate ?? leftInterpolate,
     deserializeAndSanitize(
       json: unknown,
@@ -736,6 +753,11 @@ export interface IBasePropType<
    * ```
    */
   label: string | undefined
+  /**
+   * If true, the prop will be hidden from the Studio UI but will still be
+   * present in the data model and keyframeable via the API.
+   */
+  hidden?: boolean
   default: ValueType
   /**
    * Each prop config has a `deserializeAndSanitize()` function that deserializes and sanitizes
@@ -832,6 +854,11 @@ type CommonOpts = {
    * ```
    */
   label?: string
+  /**
+   * If true, the prop will be hidden from the Studio UI but will still be
+   * present in the data model and keyframeable via the API.
+   */
+  hidden?: boolean
 }
 
 export interface PropTypeConfig_String

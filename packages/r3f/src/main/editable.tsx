@@ -10,7 +10,7 @@ import type {EditableFactoryConfig} from './editableFactoryConfigUtils'
 import {makeStoreKey} from './utils'
 import type {$FixMe, $IntentionalAny} from '../types'
 import type {ISheetObject} from '@tomorrowevening/theatre-core'
-import {notify} from '@tomorrowevening/theatre-core'
+import {notify, types} from '@tomorrowevening/theatre-core'
 import {useCurrentRafDriver} from './RafDriverProvider'
 
 const createEditable = <Keys extends keyof JSX.IntrinsicElements>(
@@ -28,6 +28,7 @@ const createEditable = <Keys extends keyof JSX.IntrinsicElements>(
       visible?: boolean | 'editor'
       additionalProps?: $FixMe
       objRef?: $FixMe
+      hiddenProps?: string[]
     } & (T extends 'primitive' ? {editableType: U} : {})
   > => {
     type Props = Omit<ComponentProps<T>, 'visible'> & {
@@ -35,6 +36,8 @@ const createEditable = <Keys extends keyof JSX.IntrinsicElements>(
       visible?: boolean | 'editor'
       additionalProps?: $FixMe
       objRef?: $FixMe
+      /** Prop keys to hide from Theatre.js Studio UI (e.g., ['rotation', 'scale']). Props remain keyframeable. */
+      hiddenProps?: string[]
     } & (T extends 'primitive'
         ? {
             editableType: U
@@ -60,6 +63,7 @@ const createEditable = <Keys extends keyof JSX.IntrinsicElements>(
         editableType,
         additionalProps,
         objRef,
+        hiddenProps,
         ...props
       }: Props,
       ref: Ref<unknown>,
@@ -135,36 +139,42 @@ Then you can use it in your JSX like any other editable component. Note the make
       // create sheet object and add editable to store
       useLayoutEffect(() => {
         if (!sheet) return
+
+        const allProps = Object.assign(
+          {
+            ...additionalProps,
+          },
+          // @ts-ignore
+          ...Object.values(config[actualType].props).map(
+            // @ts-ignore
+            (value) => value.type,
+          ),
+        )
+
+        // Mark specified props as hidden from Studio UI
+        if (hiddenProps) {
+          for (const key of hiddenProps) {
+            if (!(key in allProps)) continue
+            const prop = allProps[key]
+            if (
+              typeof prop === 'object' &&
+              prop !== null &&
+              'deserializeAndSanitize' in prop
+            ) {
+              // Longhand prop type — clone with hidden flag
+              allProps[key] = {...prop, hidden: true}
+            } else if (typeof prop === 'object' && prop !== null) {
+              // Shorthand compound (e.g., {x: types.number(...), y: types.number(...)})
+              allProps[key] = types.compound(prop as $FixMe, {hidden: true})
+            }
+          }
+        }
+
         if (sheetObject) {
-          sheet.object(
-            theatreKey,
-            Object.assign(
-              {
-                ...additionalProps,
-              },
-              // @ts-ignore
-              ...Object.values(config[actualType].props).map(
-                // @ts-ignore
-                (value) => value.type,
-              ),
-            ),
-            {reconfigure: true},
-          )
+          sheet.object(theatreKey, allProps, {reconfigure: true})
           return
         } else {
-          const sheetObject = sheet.object(
-            theatreKey,
-            Object.assign(
-              {
-                ...additionalProps,
-              },
-              // @ts-ignore
-              ...Object.values(config[actualType].props).map(
-                // @ts-ignore
-                (value) => value.type,
-              ),
-            ),
-          )
+          const sheetObject = sheet.object(theatreKey, allProps)
           allRegisteredObjects.add(sheetObject)
           setSheetObject(sheetObject)
 
@@ -181,7 +191,7 @@ Then you can use it in your JSX like any other editable component. Note the make
             objectConfig: config[actualType],
           })
         }
-      }, [sheet, storeKey, additionalProps])
+      }, [sheet, storeKey, additionalProps, hiddenProps])
 
       // store initial values of props
       useLayoutEffect(() => {
