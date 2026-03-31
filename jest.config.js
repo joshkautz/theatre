@@ -7,7 +7,7 @@ module.exports = {
     '<rootDir>/devEnv/**/*.test.ts',
   ],
   moduleNameMapper: {
-    '\\.(css|svg|png)$': 'identity-obj-proxy',
+    '\\.(css|svg|png)$': '<rootDir>/devEnv/jest/assetMock.js',
     ...require('./devEnv/getAliasesFromTsConfig').getAliasesFromTsConfigForJest(),
     'lodash-es/(.*)': 'lodash/$1',
     'react-use/esm/(.*)': 'react-use/lib/$1',
