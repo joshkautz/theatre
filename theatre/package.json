@@ -48,7 +48,6 @@
     "esbuild-register": "^2.5.0",
     "fs-extra": "^10.0.0",
     "idb-keyval": "^6.2.0",
-    "identity-obj-proxy": "^3.0.0",
     "immer": "^9.0.6",
     "jiff": "^0.7.3",
     "json-touch-patch": "^0.11.2",
