@@ -97,7 +97,7 @@ type ControlsAndButtons = {
 /**
  * The type of the `$set()` function returned by `useControls()`.
  */
-type Setter<Config extends UnknownShorthandCompoundProps> = <S>(
+export type Setter<Config extends UnknownShorthandCompoundProps> = <S>(
   pointer: (p: ISheetObject<Config>['props']) => Pointer<S>,
   value: S,
 ) => void
@@ -105,7 +105,7 @@ type Setter<Config extends UnknownShorthandCompoundProps> = <S>(
 /**
  * The type of the `$get()` function returned by `useControls()`.
  */
-type Getter<Config extends UnknownShorthandCompoundProps> = <S>(
+export type Getter<Config extends UnknownShorthandCompoundProps> = <S>(
   pointer: (p: ISheetObject<Config>['props']) => Pointer<S>,
 ) => S
 
