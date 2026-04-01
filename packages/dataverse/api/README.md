@@ -23,9 +23,17 @@ The animation-optimized FRP library powering the internals of Theatre.js.
 
 ### Type Aliases
 
+- [ICallback](README.md#icallback)
+- [IPrismFn](README.md#iprismfn)
+- [IRef](README.md#iref)
+- [PathToProp](README.md#pathtoprop)
 - [Pointer](README.md#pointer)
+- [PointerInner](README.md#pointerinner)
 - [PointerMeta](README.md#pointermeta)
 - [PointerType](README.md#pointertype)
+- [UnindexablePointer](README.md#unindexablepointer)
+- [UnindexableTypesForPointer](README.md#unindexabletypesforpointer)
+- [VoidFn](README.md#voidfn)
 
 ### Functions
 
@@ -41,9 +49,109 @@ The animation-optimized FRP library powering the internals of Theatre.js.
 
 ## Type Aliases
 
+### ICallback
+
+Ƭ **ICallback**: (`t`: `number`) => `void`
+
+#### Type declaration
+
+▸ (`t`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `t` | `number` |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+[Ticker.ts:1](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Ticker.ts#L1)
+
+___
+
+### IPrismFn
+
+Ƭ **IPrismFn**: `Object`
+
+#### Call signature
+
+▸ <`T`\>(`fn`): [`Prism`](interfaces/Prism-1.md)<`T`\>
+
+##### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fn` | () => `T` |
+
+##### Returns
+
+[`Prism`](interfaces/Prism-1.md)<`T`\>
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `effect` | (`key`: `string`, `cb`: () => () => `void`, `deps?`: `unknown`[]) => `void` |
+| `ensurePrism` | () => `void` |
+| `inPrism` | () => `boolean` |
+| `memo` | <T\>(`key`: `string`, `fn`: () => `T`, `deps`: `undefined` \| `unknown`[] \| readonly `unknown`[]) => `T` |
+| `ref` | <T\>(`key`: `string`, `initialValue`: `T`) => [`IRef`](README.md#iref)<`T`\> |
+| `scope` | <T\>(`key`: `string`, `fn`: () => `T`) => `T` |
+| `source` | <V\>(`subscribe`: (`fn`: (`val`: `V`) => `void`) => [`VoidFn`](README.md#voidfn), `getValue`: () => `V`) => `V` |
+| `state` | <T\>(`key`: `string`, `initialValue`: `T`) => [`T`, (`val`: `T`) => `void`] |
+| `sub` | <T\>(`key`: `string`, `fn`: () => `T`, `deps`: `undefined` \| `unknown`[]) => `T` |
+
+#### Defined in
+
+[prism/prism.ts:816](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/prism/prism.ts#L816)
+
+___
+
+### IRef
+
+Ƭ **IRef**<`T`\>: `Object`
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `current` | `T` |
+
+#### Defined in
+
+[prism/prism.ts:551](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/prism/prism.ts#L551)
+
+___
+
+### PathToProp
+
+Ƭ **PathToProp**: (`string` \| `number`)[]
+
+#### Defined in
+
+[pointer.ts:3](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/pointer.ts#L3)
+
+___
+
 ### Pointer
 
-Ƭ **Pointer**<`O`\>: [`PointerType`](README.md#pointertype)<`O`\> & `PointerInner`<`Exclude`<`O`, `undefined`\>, `undefined` extends `O` ? `undefined` : `never`\>
+Ƭ **Pointer**<`O`\>: [`PointerType`](README.md#pointertype)<`O`\> & [`PointerInner`](README.md#pointerinner)<`Exclude`<`O`, `undefined`\>, `undefined` extends `O` ? `undefined` : `never`\>
 
 The type of [Atom](classes/Atom.md) pointers. See [pointer()](README.md#pointer-1) for an
 explanation of pointers.
@@ -61,6 +169,23 @@ Atom
 #### Defined in
 
 [pointer.ts:64](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/pointer.ts#L64)
+
+___
+
+### PointerInner
+
+Ƭ **PointerInner**<`O`, `Optional`\>: `O` extends [`UnindexableTypesForPointer`](README.md#unindexabletypesforpointer) ? [`UnindexablePointer`](README.md#unindexablepointer) : `unknown` extends `O` ? [`UnindexablePointer`](README.md#unindexablepointer) : `O` extends infer T[] ? [`Pointer`](README.md#pointer)<`T`\>[] : `O` extends {} ? { [K in keyof O]-?: Pointer<O[K] \| Optional\> } : [`UnindexablePointer`](README.md#unindexablepointer)
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `O` |
+| `Optional` |
+
+#### Defined in
+
+[pointer.ts:72](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/pointer.ts#L72)
 
 ___
 
@@ -103,6 +228,44 @@ A wrapper type for the type a `Pointer` points to.
 
 [pointer.ts:35](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/pointer.ts#L35)
 
+___
+
+### UnindexablePointer
+
+Ƭ **UnindexablePointer**: { [K in string]: Pointer<undefined\> }
+
+#### Defined in
+
+[pointer.ts:22](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/pointer.ts#L22)
+
+___
+
+### UnindexableTypesForPointer
+
+Ƭ **UnindexableTypesForPointer**: `number` \| `string` \| `boolean` \| ``null`` \| `void` \| `undefined` \| `Function`
+
+#### Defined in
+
+[pointer.ts:13](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/pointer.ts#L13)
+
+___
+
+### VoidFn
+
+Ƭ **VoidFn**: () => `void`
+
+#### Type declaration
+
+▸ (): `void`
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+[types.ts:6](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/types.ts#L6)
+
 ## Functions
 
 ### getPointerParts
@@ -131,7 +294,7 @@ An object with two properties: `root`-the root object or the pointer, and `path`
 
 | Name | Type |
 | :------ | :------ |
-| `path` | `PathToProp` |
+| `path` | [`PathToProp`](README.md#pathtoprop) |
 | `root` | {} |
 
 **`Example`**
@@ -156,7 +319,7 @@ Returns whether `p` is a pointer.
 
 | Name | Type |
 | :------ | :------ |
-| `p` | `any` |
+| `p` | `unknown` |
 
 #### Returns
 

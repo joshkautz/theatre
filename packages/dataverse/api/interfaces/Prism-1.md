@@ -68,13 +68,13 @@ ___
 
 ### keepHot
 
-▸ **keepHot**(): `VoidFn`
+▸ **keepHot**(): [`VoidFn`](../README.md#voidfn)
 
 Keep the prism hot, even if there are no tappers (subscribers).
 
 #### Returns
 
-`VoidFn`
+[`VoidFn`](../README.md#voidfn)
 
 #### Defined in
 
@@ -84,7 +84,7 @@ ___
 
 ### onChange
 
-▸ **onChange**(`ticker`, `listener`, `immediate?`): `VoidFn`
+▸ **onChange**(`ticker`, `listener`, `immediate?`): [`VoidFn`](../README.md#voidfn)
 
 Calls `listener` with a fresh value every time the prism _has_ a new value, throttled by Ticker.
 
@@ -98,7 +98,7 @@ Calls `listener` with a fresh value every time the prism _has_ a new value, thro
 
 #### Returns
 
-`VoidFn`
+[`VoidFn`](../README.md#voidfn)
 
 #### Defined in
 
@@ -108,7 +108,7 @@ ___
 
 ### onStale
 
-▸ **onStale**(`cb`): `VoidFn`
+▸ **onStale**(`cb`): [`VoidFn`](../README.md#voidfn)
 
 #### Parameters
 
@@ -118,7 +118,7 @@ ___
 
 #### Returns
 
-`VoidFn`
+[`VoidFn`](../README.md#voidfn)
 
 #### Defined in
 

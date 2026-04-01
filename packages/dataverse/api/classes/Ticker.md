@@ -107,7 +107,7 @@ De-registers a fn to be called on the next tick.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `fn` | `ICallback` | The function to be de-registered. |
+| `fn` | [`ICallback`](../README.md#icallback) | The function to be de-registered. |
 
 #### Returns
 
@@ -133,7 +133,7 @@ De-registers a fn to be called either on this tick or the next tick.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `fn` | `ICallback` | The function to be de-registered. |
+| `fn` | [`ICallback`](../README.md#icallback) | The function to be de-registered. |
 
 #### Returns
 
@@ -159,7 +159,7 @@ Registers a side effect to be called on the next tick.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `fn` | `ICallback` | The function to be registered. |
+| `fn` | [`ICallback`](../README.md#icallback) | The function to be registered. |
 
 #### Returns
 
@@ -193,7 +193,7 @@ with the same fn twice in a single tick, it'll only run once.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `fn` | `ICallback` | The function to be registered. |
+| `fn` | [`ICallback`](../README.md#icallback) | The function to be registered. |
 
 #### Returns
 
