@@ -1,4 +1,4 @@
-import type {$FixMe, $IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import userReadableTypeOfValue from '@tomorrowevening/theatre-shared/utils/userReadableTypeOfValue'
 import type {Rgba} from '@tomorrowevening/theatre-shared/utils/color'
 import {
@@ -116,7 +116,7 @@ export const compound = <Props extends UnknownShorthandCompoundProps>(
       // than an instance of a class, just to avoid the possible edge cases of handling
       // class instances.
 
-      const deserialized: $FixMe = {}
+      const deserialized: $IntentionalAny = {}
       let atLeastOnePropWasDeserialized = false
       for (const [key, propConfig] of Object.entries(sanitizedProps)) {
         if (Object.prototype.hasOwnProperty.call(json, key)) {

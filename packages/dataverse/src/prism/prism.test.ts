@@ -4,7 +4,7 @@
 import Atom from '../Atom'
 import {val} from '../val'
 import Ticker from '../Ticker'
-import type {$FixMe, $IntentionalAny} from '../types'
+import type {$IntentionalAny} from '../types'
 import iterateAndCountTicks from './iterateAndCountTicks'
 import prism from './prism'
 
@@ -21,7 +21,7 @@ describe('prism', () => {
     })
     expect(d.getValue()).toEqual('fooboo')
 
-    const changes: Array<$FixMe> = []
+    const changes: Array<unknown> = []
     d.onChange(ticker, (c) => {
       changes.push(c)
     })

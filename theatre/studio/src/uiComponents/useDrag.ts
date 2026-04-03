@@ -1,4 +1,3 @@
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
 import {useLayoutEffect, useRef} from 'react'
 import {useCssCursorLock} from './PointerEventsHandler'
 import type {CapturedPointer} from '@tomorrowevening/theatre-studio/UIRoot/PointerCapturing'
@@ -340,13 +339,13 @@ export default function useDrag(
       dragStartHandler(e)
     }
 
-    target.addEventListener('mousedown', onMouseDown as $FixMe)
-    target.addEventListener('click', preventUnwantedClick as $FixMe)
+    target.addEventListener('mousedown', onMouseDown as EventListener)
+    target.addEventListener('click', preventUnwantedClick as EventListener)
 
     return () => {
       removeDragListeners()
-      target.removeEventListener('mousedown', onMouseDown as $FixMe)
-      target.removeEventListener('click', preventUnwantedClick as $FixMe)
+      target.removeEventListener('mousedown', onMouseDown as EventListener)
+      target.removeEventListener('click', preventUnwantedClick as EventListener)
 
       if (stateRef.current.domDragStarted) {
         callbacksRef.current.onDragEnd?.(stateRef.current.detection.detected)

@@ -1,4 +1,3 @@
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
 import {useCallback, useEffect, useState} from 'react'
 
 type IState = {isOpen: true; event: MouseEvent} | {isOpen: false}
@@ -27,9 +26,9 @@ const useRequestContextMenu = (
       event.preventDefault()
       event.stopPropagation()
     }
-    target.addEventListener('contextmenu', onTrigger as $FixMe)
+    target.addEventListener('contextmenu', onTrigger as EventListener)
     return () => {
-      target.removeEventListener('contextmenu', onTrigger as $FixMe)
+      target.removeEventListener('contextmenu', onTrigger as EventListener)
     }
   }, [target, opts.disabled])
 

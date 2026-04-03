@@ -1,5 +1,5 @@
 import type {PathToProp} from './addresses'
-import type {$FixMe, $IntentionalAny, SerializableMap} from './types'
+import type {$IntentionalAny, SerializableMap} from './types'
 
 /**
  * Mutates `base` to remove the path `path` from it. And if deleting a key makes
@@ -40,7 +40,7 @@ export default function removePathFromObject(
   // We also can bail out early  if we find that the path doesn't exist.
   for (const key of keysUpToLastKey) {
     const parent = cur
-    const child = parent[key as $FixMe]
+    const child = parent[key as string]
 
     if (typeof child !== 'object' || child === null) {
       // the path either doesn't exist, or it doesn't point to an object, so we can just return

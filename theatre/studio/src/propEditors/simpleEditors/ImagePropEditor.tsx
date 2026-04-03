@@ -1,5 +1,4 @@
 import type {PropTypeConfig_Image} from '@tomorrowevening/theatre-core/propTypes'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
 import {Trash} from '@tomorrowevening/theatre-studio/uiComponents/icons'
 import React, {useCallback, useEffect} from 'react'
 import styled, {css} from 'styled-components'
@@ -115,8 +114,9 @@ function ImagePropEditor({
   }, [value])
 
   const onChange = useCallback(
-    async (event: React.ChangeEvent<$FixMe>) => {
-      const file = event.target.files[0]
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0]
+      if (!file) return
       editingTools.permanentlySetValue({type: 'image', id: undefined})
       const imageId = await editingTools.createAsset(file)
 
@@ -128,7 +128,7 @@ function ImagePropEditor({
           id: imageId,
         })
       }
-      event.target.value = null
+      event.target.value = ''
     },
     [editingTools, value],
   )

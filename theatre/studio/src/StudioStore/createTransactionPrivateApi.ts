@@ -1,6 +1,12 @@
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
-import {isSequence, isSheetObject} from '@tomorrowevening/theatre-shared/instanceTypes'
-import type {$FixMe, $IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
+import {
+  isSequence,
+  isSheetObject,
+} from '@tomorrowevening/theatre-shared/instanceTypes'
+import type {
+  $FixMe,
+  $IntentionalAny,
+} from '@tomorrowevening/theatre-shared/utils/types'
 import get from 'lodash-es/get'
 import isInteger from 'lodash-es/isInteger'
 import type {ITransactionPrivateApi} from './StudioStore'
@@ -84,7 +90,7 @@ export default function createTransactionPrivateApi(
       const _value = cloneDeepSerializableAndPrune(value)
       if (typeof _value === 'undefined') return
 
-      const {root, path} = getPointerParts(pointer as Pointer<$FixMe>)
+      const {root, path} = getPointerParts(pointer as Pointer<unknown>)
       if (isSheetObject(root)) {
         const sequenceTracksTree = root.template
           .getMapOfValidSequenceTracks_forStudio()
@@ -131,7 +137,7 @@ export default function createTransactionPrivateApi(
 
           const propAddress = {...root.address, pathToProp: path}
 
-          const trackId = get(sequenceTracksTree, path) as $FixMe as
+          const trackId = get(sequenceTracksTree, path) as
             | SequenceTrackId
             | undefined
 
@@ -222,7 +228,7 @@ export default function createTransactionPrivateApi(
     },
     unset: (pointer) => {
       ensureRunning()
-      const {root, path} = getPointerParts(pointer as Pointer<$FixMe>)
+      const {root, path} = getPointerParts(pointer as Pointer<unknown>)
       if (isSheetObject(root)) {
         const sequenceTracksTree = root.template
           .getMapOfValidSequenceTracks_forStudio()
@@ -241,7 +247,7 @@ export default function createTransactionPrivateApi(
         const unsetStaticOrKeyframeProp = <T>(value: T, path: PathToProp) => {
           const propAddress = {...root.address, pathToProp: path}
 
-          const trackId = get(sequenceTracksTree, path) as $FixMe as
+          const trackId = get(sequenceTracksTree, path) as
             | SequenceTrackId
             | undefined
 

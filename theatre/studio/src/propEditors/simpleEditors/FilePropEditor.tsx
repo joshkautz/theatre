@@ -1,9 +1,11 @@
 import type {PropTypeConfig_File} from '@tomorrowevening/theatre-core/propTypes'
-import {Package, Trash} from '@tomorrowevening/theatre-studio/uiComponents/icons'
+import {
+  Package,
+  Trash,
+} from '@tomorrowevening/theatre-studio/uiComponents/icons'
 import React, {useCallback, useEffect} from 'react'
 import styled, {css} from 'styled-components'
 import type {ISimplePropEditorReactProps} from './ISimplePropEditorReactProps'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
 
 const Container = styled.div<{empty: boolean}>`
   display: flex;
@@ -106,8 +108,9 @@ function FilePropEditor({
   }, [value])
 
   const onChange = useCallback(
-    async (event: React.ChangeEvent<$FixMe>) => {
-      const file = event.target.files[0]
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0]
+      if (!file) return
       editingTools.permanentlySetValue({type: 'file', id: undefined})
       const fileId = await editingTools.createAsset(file)
 
@@ -119,7 +122,7 @@ function FilePropEditor({
           id: fileId,
         })
       }
-      event.target.value = null
+      event.target.value = ''
     },
     [editingTools, value],
   )

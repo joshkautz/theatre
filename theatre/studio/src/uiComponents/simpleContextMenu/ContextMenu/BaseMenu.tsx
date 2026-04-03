@@ -1,7 +1,6 @@
 import type {ElementType} from 'react'
 import React from 'react'
 import Item from './Item'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
 import styled from 'styled-components'
 import {transparentize} from 'polished'
 import {pointerEventsAutoInNormalMode} from '@tomorrowevening/theatre-studio/css'
@@ -43,10 +42,10 @@ type MenuItem = {
 
 const BaseMenu: React.FC<{
   items: MenuItem[]
-  ref?: $FixMe
+  ref?: React.Ref<HTMLUListElement>
   displayName?: string
   onRequestClose: () => void
-}> = React.forwardRef((props, ref: $FixMe) => {
+}> = React.forwardRef((props, ref: React.Ref<HTMLUListElement>) => {
   return (
     <MenuContainer ref={ref}>
       {SHOW_OPTIONAL_MENU_TITLE && props.displayName ? (

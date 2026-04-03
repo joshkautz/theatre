@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import {pointerEventsAutoInNormalMode} from '@tomorrowevening/theatre-studio/css'
 import React from 'react'
-import type {$FixMe, $IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import useTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/useTooltip'
 import {mergeRefs} from 'react-merge-refs'
 import MinimalTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/MinimalTooltip'
@@ -68,7 +68,10 @@ export const Container = styled.button`
 `
 
 const ToolbarIconButton: typeof Container = React.forwardRef(
-  ({title, ...props}: $FixMe, ref: $FixMe) => {
+  (
+    {title, ...props}: React.ButtonHTMLAttributes<HTMLButtonElement>,
+    ref: React.Ref<HTMLButtonElement>,
+  ) => {
     const [tooltip, localRef] = useTooltip(
       {enabled: typeof title === 'string'},
       () => <MinimalTooltip>{title}</MinimalTooltip>,

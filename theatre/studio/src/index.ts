@@ -8,7 +8,6 @@ import {setStudio} from '@tomorrowevening/theatre-studio/getStudio'
 import {Studio} from '@tomorrowevening/theatre-studio/Studio'
 
 import * as globalVariableNames from '@tomorrowevening/theatre-shared/globalVariableNames'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
 import StudioBundle from './StudioBundle'
 import type CoreBundle from '@tomorrowevening/theatre-core/CoreBundle'
 import type {IStudio} from '@tomorrowevening/theatre-studio/TheatreStudio'
@@ -28,7 +27,7 @@ registerStudioBundle()
 function registerStudioBundle() {
   if (typeof window == 'undefined') return
 
-  const existingStudioBundle = (window as $FixMe)[
+  const existingStudioBundle = (window as unknown as Record<string, unknown>)[
     globalVariableNames.studioBundle
   ]
 
@@ -36,7 +35,8 @@ function registerStudioBundle() {
     if (
       typeof existingStudioBundle === 'object' &&
       existingStudioBundle &&
-      typeof existingStudioBundle.version === 'string'
+      typeof (existingStudioBundle as Record<string, unknown>).version ===
+        'string'
     ) {
       throw new Error(
         `It seems that the module '@tomorrowevening/theatre-studio' is loaded more than once. This could have two possible causes:\n` +

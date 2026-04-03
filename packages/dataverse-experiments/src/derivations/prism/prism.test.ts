@@ -1,6 +1,6 @@
 import Atom, {val} from '../../Atom'
 import Ticker from '../../Ticker'
-import type {$FixMe, $IntentionalAny} from '../../types'
+import type {$IntentionalAny} from '../../types'
 import ConstantDerivation from '../ConstantDerivation'
 import iterateAndCountTicks from '../iterateAndCountTicks'
 import prism, {PrismDerivation} from './prism'
@@ -18,7 +18,7 @@ describe.skip('prism', () => {
     })
     expect(d.getValue()).toEqual('fooboo')
 
-    const changes: Array<$FixMe> = []
+    const changes: Array<unknown> = []
     d.changes().tap((c) => {
       changes.push(c)
     })
