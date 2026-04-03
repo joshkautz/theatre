@@ -29,7 +29,6 @@ const PrimitivePropRowContainer = styled(BaseContainer)<{}>``
 
 const PrimitivePropRowHead = styled(BaseHeader)<{
   $isSelected: boolean
-  $isEven: boolean
 }>`
   display: flex;
   color: ${theme.label.color};
@@ -179,7 +178,6 @@ const PrimitivePropRow: React.FC<{
       {contextMenu}
       <PrimitivePropRowHead
         ref={headRef}
-        $isEven={leaf.n % 2 === 0}
         style={{
           height: leaf.nodeHeight + 'px',
         }}

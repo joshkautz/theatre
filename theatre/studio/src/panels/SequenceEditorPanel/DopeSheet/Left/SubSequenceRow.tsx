@@ -168,7 +168,6 @@ const SubSequenceRow: React.FC<{
         style={{
           height: leaf.nodeHeight + 'px',
         }}
-        $isEven={leaf.n % 2 === 0}
       >
         <LeftRowHead_Label>{subSequenceLabel}</LeftRowHead_Label>
       </LeftRowHeader>

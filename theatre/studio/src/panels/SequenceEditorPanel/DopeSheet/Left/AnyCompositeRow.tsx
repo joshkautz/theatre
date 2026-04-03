@@ -21,7 +21,7 @@ export const LeftRowContainer = styled.li<{$depth: number}>`
   list-style: none;
 `
 
-export const BaseHeader = styled.div<{$isEven: boolean}>`
+export const BaseHeader = styled.div`
   border-bottom: 1px solid #7695b705;
 `
 
@@ -139,7 +139,6 @@ const AnyCompositeRow: React.FC<{
         $isSelectable={isSelectable === true}
         $isSelected={isSelected === true}
         onClick={toggleSelect}
-        $isEven={leaf.n % 2 === 0}
       >
         <LeftRowHead_Icon $isCollapsed={isCollapsed} onClick={toggleCollapsed}>
           <HiOutlineChevronRight />

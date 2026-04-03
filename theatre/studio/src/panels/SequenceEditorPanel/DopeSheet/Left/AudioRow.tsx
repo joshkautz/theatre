@@ -409,7 +409,6 @@ const AudioRow: React.FC<{
       <LeftRowHeader
         ref={rowHeaderRef}
         style={{height: leaf.nodeHeight + 'px'}}
-        $isEven={leaf.n % 2 === 0}
       >
         <LeftRowHead_Label title={leaf.audio.label}>
           ♪
