@@ -1,6 +1,6 @@
 import type {SheetObjectPropTypeConfig} from '@tomorrowevening/theatre-core/sheets/TheatreSheet'
 import type {
-  $FixMe,
+  $IntentionalAny,
   SerializableMap,
   SerializableValue,
 } from '@tomorrowevening/theatre-shared/utils/types'
@@ -52,7 +52,9 @@ function generateDefaultsForEnum(config: PropTypeConfig_Enum) {
   return defaults
 }
 
-function generateDefaultsForCompound(config: PropTypeConfig_Compound<$FixMe>) {
+function generateDefaultsForCompound(
+  config: PropTypeConfig_Compound<$IntentionalAny>,
+) {
   const defaults: SerializableMap = {}
   for (const [key, propConf] of Object.entries(config.props)) {
     defaults[key] = getDefaultsOfPropTypeConfig(propConf)

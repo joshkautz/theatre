@@ -11,7 +11,7 @@ import styled from 'styled-components'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {prism, val} from '@tomorrowevening/theatre-dataverse'
 import type {SequenceEditorPanelLayout} from '@tomorrowevening/theatre-studio/panels/SequenceEditorPanel/layout/layout'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import randomColor from '@tomorrowevening/theatre-studio/utils/randomColor'
 
@@ -62,7 +62,7 @@ const TheCanvas = styled.canvas`
 `
 
 const getBackingStoreRatio = (ctx: CanvasRenderingContext2D): number => {
-  const _ctx = ctx as $FixMe
+  const _ctx = ctx as $IntentionalAny
   return (
     _ctx.webkitBackingStorePixelRatio ||
     _ctx.mozBackingStorePixelRatio ||

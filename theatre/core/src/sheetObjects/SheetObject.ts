@@ -7,21 +7,36 @@ import type {SequenceTrackId} from '@tomorrowevening/theatre-shared/utils/ids'
 import pointerDeep from '@tomorrowevening/theatre-shared/utils/pointerDeep'
 import SimpleCache from '@tomorrowevening/theatre-shared/utils/SimpleCache'
 import type {
-  $FixMe,
   $IntentionalAny,
   DeepPartialOfSerializableValue,
   SerializableMap,
   SerializableValue,
 } from '@tomorrowevening/theatre-shared/utils/types'
 import {valToAtom} from '@tomorrowevening/theatre-shared/utils/valToAtom'
-import type {PointerToPrismProvider, Prism, Pointer} from '@tomorrowevening/theatre-dataverse'
+import type {
+  PointerToPrismProvider,
+  Prism,
+  Pointer,
+} from '@tomorrowevening/theatre-dataverse'
 
-import {Atom, getPointerParts, pointer, prism, val} from '@tomorrowevening/theatre-dataverse'
+import {
+  Atom,
+  getPointerParts,
+  pointer,
+  prism,
+  val,
+} from '@tomorrowevening/theatre-dataverse'
 import type SheetObjectTemplate from './SheetObjectTemplate'
 import TheatreSheetObject from './TheatreSheetObject'
-import type {Interpolator, PropTypeConfig} from '@tomorrowevening/theatre-core/propTypes'
+import type {
+  Interpolator,
+  PropTypeConfig,
+} from '@tomorrowevening/theatre-core/propTypes'
 import {getPropConfigByPath} from '@tomorrowevening/theatre-shared/propTypes/utils'
-import type {ILogger, IUtilContext} from '@tomorrowevening/theatre-shared/logger'
+import type {
+  ILogger,
+  IUtilContext,
+} from '@tomorrowevening/theatre-shared/logger'
 
 /**
  * Internally, the sheet's actual configured value is not a specific type, since we
@@ -207,7 +222,7 @@ export default class SheetObject implements PointerToPrismProvider {
     const {path} = getPointerParts(pointer)
 
     return val(
-      pointerDeep(allValuesP as $FixMe, path),
+      pointerDeep(allValuesP as $IntentionalAny, path),
     ) as SerializableValue as T
   }
 
@@ -219,7 +234,9 @@ export default class SheetObject implements PointerToPrismProvider {
      */
     return prism(() => {
       const allValuesP = val(this.getValues())
-      return val(pointerDeep(allValuesP as $FixMe, path)) as SerializableMap
+      return val(
+        pointerDeep(allValuesP as $IntentionalAny, path),
+      ) as SerializableMap
     }) as $IntentionalAny as Prism<P>
   }
 
@@ -320,7 +337,7 @@ export default class SheetObject implements PointerToPrismProvider {
   get propsP(): Pointer<SheetObjectPropsValue> {
     return this._cache.get('propsP', () =>
       pointer<{props: {}}>({root: this, path: []}),
-    ) as $FixMe
+    ) as $IntentionalAny
   }
 
   validateValue(

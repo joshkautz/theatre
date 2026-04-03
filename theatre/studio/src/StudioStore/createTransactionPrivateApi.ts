@@ -3,10 +3,7 @@ import {
   isSequence,
   isSheetObject,
 } from '@tomorrowevening/theatre-shared/instanceTypes'
-import type {
-  $FixMe,
-  $IntentionalAny,
-} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import get from 'lodash-es/get'
 import isInteger from 'lodash-es/isInteger'
 import type {ITransactionPrivateApi} from './StudioStore'
@@ -149,14 +146,14 @@ export default function createTransactionPrivateApi(
                 ...propAddress,
                 trackId,
                 position: seq.position,
-                value: value as $FixMe,
+                value: value as $IntentionalAny,
                 snappingFunction: seq.closestGridPosition,
                 type: 'bezier',
               },
             )
           } else {
             stateEditors.coreByProject.historic.sheetsById.staticOverrides.byObject.setValueOfPrimitiveProp(
-              {...propAddress, value: value as $FixMe},
+              {...propAddress, value: value as $IntentionalAny},
             )
           }
         }

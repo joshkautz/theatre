@@ -1,4 +1,7 @@
-import {privateAPI, setPrivateAPI} from '@tomorrowevening/theatre-core/privateAPIs'
+import {
+  privateAPI,
+  setPrivateAPI,
+} from '@tomorrowevening/theatre-core/privateAPIs'
 import type {IProject} from '@tomorrowevening/theatre-core/projects/TheatreProject'
 import type TheatreSequence from '@tomorrowevening/theatre-core/sequences/TheatreSequence'
 import type {ISequence} from '@tomorrowevening/theatre-core/sequences/TheatreSequence'
@@ -9,7 +12,7 @@ import type Sheet from '@tomorrowevening/theatre-core/sheets/Sheet'
 import type {SheetAddress} from '@tomorrowevening/theatre-shared/utils/addresses'
 import {InvalidArgumentError} from '@tomorrowevening/theatre-shared/utils/errors'
 import {validateAndSanitiseSlashedPathOrThrow} from '@tomorrowevening/theatre-shared/utils/slashedPaths'
-import type {$FixMe, $IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import userReadableTypeOfValue from '@tomorrowevening/theatre-shared/utils/userReadableTypeOfValue'
 import deepEqual from 'fast-deep-equal'
 import type {
@@ -202,7 +205,7 @@ export default class TheatreSheet implements ISheet {
         actions,
       )
       if (process.env.NODE_ENV !== 'production') {
-        weakMapOfUnsanitizedProps.set(object as $FixMe, config)
+        weakMapOfUnsanitizedProps.set(object as $IntentionalAny, config)
       }
       return object.publicApi as $IntentionalAny
     }

@@ -1,6 +1,6 @@
 import actionCreator from '@tomorrowevening/theatre-studio/utils/redux/actionCreator'
 import type {
-  $FixMe,
+  $IntentionalAny,
   GenericAction,
   ReduxReducer,
 } from '@tomorrowevening/theatre-shared/utils/types'
@@ -15,7 +15,7 @@ const withBatchedActions = <S extends {}>(
 ): ReduxReducer<S> => {
   return (prevState: undefined | S, action: unknown): S => {
     if (batchedAction.is(action)) {
-      return (action.payload as $FixMe).reduce(
+      return (action.payload as $IntentionalAny).reduce(
         (stateSoFar: undefined | S, a: GenericAction): S =>
           reducer(stateSoFar, a),
         prevState,

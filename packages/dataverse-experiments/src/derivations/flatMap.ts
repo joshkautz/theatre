@@ -1,4 +1,4 @@
-import type {$FixMe} from '../types'
+import type {$IntentionalAny} from '../types'
 import AbstractDerivation from './AbstractDerivation'
 import type {IDerivation} from './IDerivation'
 
@@ -123,5 +123,5 @@ export default function flatMap<V, R>(
   if (!cls) {
     cls = makeFlatMapDerivationClass()
   }
-  return new cls(dep, fn) as $FixMe
+  return new cls(dep, fn) as $IntentionalAny
 }

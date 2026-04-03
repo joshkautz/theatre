@@ -3,7 +3,7 @@ import {val} from './val'
 import type {Pointer} from './pointer'
 import {getPointerMeta} from './pointer'
 import pointer from './pointer'
-import type {$FixMe, $IntentionalAny} from './types'
+import type {$IntentionalAny} from './types'
 import prism from './prism/prism'
 import type {Prism} from './prism/Interface'
 import type {PointerToPrismProvider} from './pointerToPrism'
@@ -33,7 +33,7 @@ export default class PointerProxy<O extends {}>
 
   constructor(currentPointer: Pointer<O>) {
     this._currentPointerBox = new Atom(currentPointer)
-    this.pointer = pointer({root: this as $FixMe, path: []})
+    this.pointer = pointer({root: this as $IntentionalAny, path: []})
   }
 
   /**

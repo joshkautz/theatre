@@ -1,5 +1,4 @@
 import type {SequenceEditorPanelLayout} from '@tomorrowevening/theatre-studio/panels/SequenceEditorPanel/layout/layout'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {prism, val} from '@tomorrowevening/theatre-dataverse'
 import React, {useLayoutEffect, useMemo, useRef, useState} from 'react'
@@ -24,7 +23,8 @@ const TheCanvas = styled.canvas`
  * from https://github.com/jonobr1/two.js/blob/758672c280278da2980b57e42ecb96eab4fe7a95/src/utils/get-ratio.js#L20
  */
 const getBackingStoreRatio = (ctx: CanvasRenderingContext2D): number => {
-  const _ctx = ctx as $FixMe
+  // Vendor-prefixed properties for legacy HiDPI detection
+  const _ctx = ctx as unknown as Record<string, number | undefined>
   return (
     _ctx.webkitBackingStorePixelRatio ||
     _ctx.mozBackingStorePixelRatio ||

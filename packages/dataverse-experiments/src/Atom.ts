@@ -6,7 +6,7 @@ import type {IDerivation} from './derivations/IDerivation'
 import {isDerivation} from './derivations/IDerivation'
 import type {Pointer, PointerType} from './pointer'
 import pointer, {getPointerMeta} from './pointer'
-import type {$FixMe, $IntentionalAny} from './types'
+import type {$IntentionalAny} from './types'
 import type {PathBasedReducer} from './utils/PathBasedReducer'
 import updateDeep from './utils/updateDeep'
 
@@ -101,7 +101,7 @@ export default class Atom<State extends {}> {
   constructor(initialState: State) {
     this._currentState = initialState
     this._rootScope = new Scope(undefined, [])
-    this.pointer = pointer({root: this as $FixMe, path: []})
+    this.pointer = pointer({root: this as $IntentionalAny, path: []})
   }
 
   setState(newState: State) {
@@ -128,7 +128,7 @@ export default class Atom<State extends {}> {
     return newState
   }
 
-  setIn(path: $FixMe[], val: $FixMe) {
+  setIn(path: (string | number)[], val: unknown) {
     return this.reduceState(path, () => val)
   }
 

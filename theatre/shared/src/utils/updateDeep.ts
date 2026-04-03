@@ -1,4 +1,4 @@
-import type {$FixMe, $IntentionalAny} from './types'
+import type {$IntentionalAny} from './types'
 
 /**
  * Returns a new object with the value at `path` replaced with the result of `reducer(oldValue)`.
@@ -20,10 +20,10 @@ export default function updateDeep<S>(
 }
 
 const hoop = (
-  s: $FixMe,
+  s: $IntentionalAny,
   path: (string | number)[],
-  reducer: $FixMe,
-): $FixMe => {
+  reducer: (state: $IntentionalAny) => $IntentionalAny,
+): $IntentionalAny => {
   if (path.length === 0) {
     return reducer(s)
   }

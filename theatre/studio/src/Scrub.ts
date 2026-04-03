@@ -1,5 +1,4 @@
 import forEachPropDeep from '@tomorrowevening/theatre-shared/utils/forEachDeep'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {getPointerParts} from '@tomorrowevening/theatre-dataverse'
 import type {Studio} from './Studio'
@@ -174,7 +173,7 @@ export default class Scrub implements IScrub {
     transaction: CommitOrDiscard
     flagsTransaction: CommitOrDiscard
   } {
-    const sets: Array<Pointer<$FixMe>> = []
+    const sets: Array<Pointer<unknown>> = []
     const transaction = this._studio.tempTransaction((transactionApi) => {
       let running = true
 
@@ -193,7 +192,7 @@ export default class Scrub implements IScrub {
           }
 
           transactionApi.set(pointer, value)
-          sets.push(pointer as Pointer<$FixMe>)
+          sets.push(pointer as Pointer<unknown>)
         },
       }
 

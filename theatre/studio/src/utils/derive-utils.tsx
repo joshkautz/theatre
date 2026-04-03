@@ -1,7 +1,7 @@
 import {isPrism, prism, val} from '@tomorrowevening/theatre-dataverse'
 import type {Prism, Pointer} from '@tomorrowevening/theatre-dataverse'
 import {usePrismInstance} from '@tomorrowevening/theatre-react'
-import type {$FixMe, $IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import React, {useMemo, useRef} from 'react'
 import {invariant} from './invariant'
 
@@ -100,5 +100,5 @@ export function deriver<Props extends {}>(
 
   finalComp.displayName = `deriver(${Component.displayName})`
 
-  return finalComp as $FixMe
+  return finalComp as $IntentionalAny
 }

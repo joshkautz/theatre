@@ -1,8 +1,6 @@
 import forEach from 'lodash-es/forEach'
 import without from 'lodash-es/without'
-import type {$FixMe} from '../types'
-
-type Listener = (v: $FixMe) => void
+type Listener = (v: unknown) => void
 
 /**
  * A simple barebones event emitter

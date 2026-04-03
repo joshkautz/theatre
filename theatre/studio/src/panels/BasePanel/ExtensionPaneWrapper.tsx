@@ -1,4 +1,4 @@
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import type {PanelPosition} from '@tomorrowevening/theatre-studio/store/types'
 import type {PaneInstance} from '@tomorrowevening/theatre-studio/TheatreStudio'
 import React, {useCallback, useLayoutEffect, useState} from 'react'
@@ -29,7 +29,7 @@ const defaultPosition: PanelPosition = {
 const minDims = {width: 100, height: 100}
 
 const ExtensionPaneWrapper: React.FC<{
-  paneInstance: PaneInstance<$FixMe>
+  paneInstance: PaneInstance<$IntentionalAny>
 }> = ({paneInstance}) => {
   return (
     <BasePanel
@@ -135,7 +135,7 @@ const ErrorFallback: React.FC<{error: Error}> = (props) => {
   )
 }
 
-const Content: React.FC<{paneInstance: PaneInstance<$FixMe>}> = ({
+const Content: React.FC<{paneInstance: PaneInstance<$IntentionalAny>}> = ({
   paneInstance,
 }) => {
   const [mountingPoint, setMountingPoint] = useState<HTMLElement | null>(null)

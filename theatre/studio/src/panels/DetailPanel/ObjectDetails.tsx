@@ -1,7 +1,7 @@
 import React from 'react'
 import type SheetObject from '@tomorrowevening/theatre-core/sheetObjects/SheetObject'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import DeterminePropEditorForDetail from './DeterminePropEditorForDetail'
 import {useVal} from '@tomorrowevening/theatre-react'
 import uniqueKeyForAnyObject from '@tomorrowevening/theatre-shared/utils/uniqueKeyForAnyObject'
@@ -51,7 +51,7 @@ const ObjectDetails: React.FC<{
         // calls `sheet.object(key)` with the same key, we want to re-render the object details panel.
         key={uniqueKeyForAnyObject(obj)}
         obj={obj}
-        pointerToProp={obj.propsP as Pointer<$FixMe>}
+        pointerToProp={obj.propsP as Pointer<$IntentionalAny>}
         propConfig={config}
         visualIndentation={1}
       />

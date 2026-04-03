@@ -6,7 +6,7 @@ import type {Pointer} from './pointer'
 import {getPointerParts} from './pointer'
 import {isPointer} from './pointer'
 import pointer from './pointer'
-import type {$FixMe, $IntentionalAny} from './types'
+import type {$IntentionalAny} from './types'
 import updateDeep from './utils/updateDeep'
 import prism from './prism/prism'
 import type {PointerToPrismProvider} from './pointerToPrism'
@@ -110,7 +110,10 @@ export default class Atom<State> implements PointerToPrismProvider {
    * @remarks
    * Equivalent to `pointer({ root: thisAtom, path: [] })`.
    */
-  readonly pointer: Pointer<State> = pointer({root: this as $FixMe, path: []})
+  readonly pointer: Pointer<State> = pointer({
+    root: this as $IntentionalAny,
+    path: [],
+  })
 
   readonly prism: Prism<State> = this.pointerToPrism(
     this.pointer,

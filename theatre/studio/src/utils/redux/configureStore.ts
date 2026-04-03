@@ -1,5 +1,4 @@
 import type {
-  $FixMe,
   $IntentionalAny,
   ReduxReducer,
 } from '@tomorrowevening/theatre-shared/utils/types'
@@ -9,7 +8,7 @@ import {compose, createStore} from 'redux'
 
 interface Conf<State extends {}> {
   rootReducer: ReduxReducer<State>
-  devtoolsOptions?: $FixMe
+  devtoolsOptions?: Record<string, unknown>
 }
 
 export default function configureStore<State extends {}>(

@@ -6,7 +6,7 @@ import {generateDiskStateRevision} from '@tomorrowevening/theatre-studio/StudioS
 import type {ProjectEphemeralState} from '@tomorrowevening/theatre-core/projects/store/storeTypes'
 import useTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/useTooltip'
 import BasicTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/BasicTooltip'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import DetailPanelButton from '@tomorrowevening/theatre-studio/uiComponents/DetailPanelButton'
 import type {ProjectId} from '@tomorrowevening/theatre-shared/utils/ids'
 
@@ -117,14 +117,14 @@ const InConflict: React.FC<{
         {browserStateNode}
         <DetailPanelButton
           onClick={useBrowserState}
-          ref={browserStateRef as $FixMe}
+          ref={browserStateRef as $IntentionalAny}
         >
           Use browser's state
         </DetailPanelButton>
         {diskStateNode}
         <DetailPanelButton
           onClick={useOnDiskState}
-          ref={diskStateRef as $FixMe}
+          ref={diskStateRef as $IntentionalAny}
         >
           Use disk state
         </DetailPanelButton>

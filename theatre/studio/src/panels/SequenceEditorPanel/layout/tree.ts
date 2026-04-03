@@ -13,10 +13,7 @@ import type {
   SequenceSubSequenceId,
 } from '@tomorrowevening/theatre-shared/utils/ids'
 import {createStudioSheetItemKey} from '@tomorrowevening/theatre-shared/utils/ids'
-import type {
-  $FixMe,
-  $IntentionalAny,
-} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import {prism, val} from '@tomorrowevening/theatre-dataverse'
 import logger from '@tomorrowevening/theatre-shared/logger'
 import type {Studio} from '@tomorrowevening/theatre-studio/Studio'
@@ -493,7 +490,7 @@ export const calculateSequenceEditorTree = (
     trackMapping: IPropPathToTrackIdTree,
     propConf: PropTypeConfig_Compound<UnknownValidCompoundProps>,
     pathToProp: PathToProp,
-    conf: PropTypeConfig_Compound<$FixMe>,
+    conf: PropTypeConfig_Compound<$IntentionalAny>,
     arrayOfChildren: Array<
       SequenceEditorTree_PrimitiveProp | SequenceEditorTree_PropWithChildren
     >,

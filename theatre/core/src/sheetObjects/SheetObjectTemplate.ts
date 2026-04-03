@@ -12,17 +12,24 @@ import type {
   WithoutSheetInstance,
 } from '@tomorrowevening/theatre-shared/utils/addresses'
 import getDeep from '@tomorrowevening/theatre-shared/utils/getDeep'
-import type {ObjectAddressKey, SequenceTrackId} from '@tomorrowevening/theatre-shared/utils/ids'
+import type {
+  ObjectAddressKey,
+  SequenceTrackId,
+} from '@tomorrowevening/theatre-shared/utils/ids'
 import SimpleCache from '@tomorrowevening/theatre-shared/utils/SimpleCache'
 import type {
-  $FixMe,
   $IntentionalAny,
   SerializableMap,
   SerializablePrimitive,
   SerializableValue,
 } from '@tomorrowevening/theatre-shared/utils/types'
 import type {Prism, Pointer} from '@tomorrowevening/theatre-dataverse'
-import {Atom, getPointerParts, prism, val} from '@tomorrowevening/theatre-dataverse'
+import {
+  Atom,
+  getPointerParts,
+  prism,
+  val,
+} from '@tomorrowevening/theatre-dataverse'
 import set from 'lodash-es/set'
 import getPropDefaultsOfSheetObject from './getPropDefaultsOfSheetObject'
 import SheetObject from './SheetObject'
@@ -299,7 +306,7 @@ export default class SheetObjectTemplate {
     const defaults = this.getDefaultValues().getValue()
 
     const defaultsAtPath = getDeep(defaults, path)
-    return defaultsAtPath as $FixMe
+    return defaultsAtPath as $IntentionalAny
   }
 }
 

@@ -1,6 +1,5 @@
 import actionCreator from '@tomorrowevening/theatre-studio/utils/redux/actionCreator'
 import type {
-  $FixMe,
   $IntentionalAny,
   ReduxReducer,
 } from '@tomorrowevening/theatre-shared/utils/types'
@@ -88,7 +87,7 @@ export const withHistory = <InnerState extends {}>(
     if (historicActions.startHistoryFromScratch.is(action)) {
       return createEmptyHistory(innerReducer(undefined, action.payload))
     } else if (historicActions.replaceHistory.is(action)) {
-      return action.payload as $FixMe
+      return action.payload as $IntentionalAny
     } else {
       if (historicActions.undo.is(action)) {
         return state ? undo(state) : cachedEmptyHistory

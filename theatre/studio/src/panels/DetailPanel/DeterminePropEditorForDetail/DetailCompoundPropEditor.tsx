@@ -3,7 +3,7 @@ import type {
   PropTypeConfig_Number,
 } from '@tomorrowevening/theatre-core/propTypes'
 import {isPropConfigComposite} from '@tomorrowevening/theatre-shared/propTypes/utils'
-import type {$FixMe} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import {Atom, getPointerParts} from '@tomorrowevening/theatre-dataverse'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import last from 'lodash-es/last'
@@ -186,7 +186,7 @@ function DetailCompoundPropEditor<
     useRefAndState<HTMLDivElement | null>(null)
 
   const tools = useEditingToolsForCompoundProp(
-    pointerToProp as $FixMe,
+    pointerToProp as $IntentionalAny,
     obj,
     propConfig,
   )
@@ -259,7 +259,9 @@ function DetailCompoundPropEditor<
                   key={'prop-' + subPropKey}
                   // @ts-ignore
                   propConfig={subPropConfig}
-                  pointerToProp={pointerToProp[subPropKey] as Pointer<$FixMe>}
+                  pointerToProp={
+                    pointerToProp[subPropKey] as Pointer<$IntentionalAny>
+                  }
                   obj={obj}
                 />
               )
@@ -281,7 +283,9 @@ function DetailCompoundPropEditor<
                 <DeterminePropEditorForDetail
                   key={'prop-' + subPropKey}
                   propConfig={subPropConfig}
-                  pointerToProp={pointerToProp[subPropKey] as Pointer<$FixMe>}
+                  pointerToProp={
+                    pointerToProp[subPropKey] as Pointer<$IntentionalAny>
+                  }
                   obj={obj}
                   visualIndentation={visualIndentation + 1}
                 />

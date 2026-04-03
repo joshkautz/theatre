@@ -8,7 +8,7 @@ import {useCurrentSheet} from './SheetProvider'
 import defaultEditableFactoryConfig from './defaultEditableFactoryConfig'
 import type {EditableFactoryConfig} from './editableFactoryConfigUtils'
 import {makeStoreKey} from './utils'
-import type {$FixMe, $IntentionalAny} from '../types'
+import type {$IntentionalAny} from '../types'
 import type {ISheetObject} from '@tomorrowevening/theatre-core'
 import {notify} from '@tomorrowevening/theatre-core'
 import {useCurrentRafDriver} from './RafDriverProvider'
@@ -26,8 +26,8 @@ const createEditable = <Keys extends keyof JSX.IntrinsicElements>(
     type Props = Omit<ComponentProps<T>, 'visible'> & {
       theatreKey: string
       visible?: boolean | 'editor'
-      additionalProps?: $FixMe
-      objRef?: $FixMe
+      additionalProps?: $IntentionalAny
+      objRef?: $IntentionalAny
     } & (T extends 'primitive'
         ? {
             editableType: U
@@ -78,7 +78,7 @@ const createEditable = <Keys extends keyof JSX.IntrinsicElements>(
         const rafDriver = useCurrentRafDriver()
 
         const [sheetObject, setSheetObject] = useState<
-          undefined | ISheetObject<$FixMe>
+          undefined | ISheetObject<$IntentionalAny>
         >(undefined)
 
         const storeKey = useMemo(
@@ -256,8 +256,8 @@ Then you can use it in your JSX like any other editable component. Note the make
       Omit<JSX.IntrinsicElements[Property], 'visible'> & {
         theatreKey: string
         visible?: boolean | 'editor'
-        additionalProps?: $FixMe
-        objRef?: $FixMe
+        additionalProps?: $IntentionalAny
+        objRef?: $IntentionalAny
         // not exactly sure how to get the type of the threejs object itself
         ref?: Ref<unknown>
       }
@@ -268,8 +268,8 @@ Then you can use it in your JSX like any other editable component. Note the make
         object: any
         theatreKey: string
         visible?: boolean | 'editor'
-        additionalProps?: $FixMe
-        objRef?: $FixMe
+        additionalProps?: $IntentionalAny
+        objRef?: $IntentionalAny
         editableType: keyof JSX.IntrinsicElements
         // not exactly sure how to get the type of the threejs object itself
         ref?: Ref<unknown>

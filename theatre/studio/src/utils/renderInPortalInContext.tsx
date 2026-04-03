@@ -1,6 +1,6 @@
 import {Atom} from '@tomorrowevening/theatre-dataverse'
 import {useVal} from '@tomorrowevening/theatre-react'
-import type {$FixMe, $IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
+import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import React from 'react'
 import {createPortal} from 'react-dom'
 
@@ -60,7 +60,7 @@ export const MountAll = () => {
 
 const Mount = ({id}: {id: number}) => {
   const {comp, portalNode, props} = useVal(theAtom.pointer.byId[id])
-  const Comp = comp as $FixMe
+  const Comp = comp as React.ComponentType<Record<string, unknown>>
 
   return createPortal(<Comp {...props} />, portalNode)
 }
