@@ -31,9 +31,9 @@ const getKeyOfValue = (
   vType: ValueTypes = getTypeOfValue(v),
 ): unknown => {
   if (vType === ValueTypes.Dict && typeof key === 'string') {
-    return (v as $IntentionalAny)[key]
+    return (v as Record<string | number, unknown>)[key]
   } else if (vType === ValueTypes.Array && isValidArrayIndex(key)) {
-    return (v as $IntentionalAny)[key]
+    return (v as Record<string | number, unknown>)[key]
   } else {
     return undefined
   }
@@ -111,13 +111,13 @@ export default class Atom<State> implements PointerToPrismProvider {
    * Equivalent to `pointer({ root: thisAtom, path: [] })`.
    */
   readonly pointer: Pointer<State> = pointer({
-    root: this as $IntentionalAny,
+    root: this as unknown as {},
     path: [],
   })
 
   readonly prism: Prism<State> = this.pointerToPrism(
     this.pointer,
-  ) as $IntentionalAny
+  ) as Prism<State>
 
   constructor(initialState: State) {
     this._currentState = initialState
@@ -155,11 +155,11 @@ export default class Atom<State> implements PointerToPrismProvider {
   getByPointer<S>(
     pointerOrFn: Pointer<S> | ((p: Pointer<State>) => Pointer<S>),
   ): S {
-    const pointer = isPointer(pointerOrFn)
+    const resolvedPointer = isPointer(pointerOrFn)
       ? pointerOrFn
-      : (pointerOrFn as $IntentionalAny)(this.pointer)
+      : (pointerOrFn as (p: Pointer<State>) => Pointer<S>)(this.pointer)
 
-    const path = getPointerParts(pointer).path
+    const path = getPointerParts(resolvedPointer as Pointer<S>).path
     return this._getIn(path) as S
   }
 

@@ -7,7 +7,6 @@ import type {ISheet} from '@tomorrowevening/theatre-core/sheets/TheatreSheet'
 import type {SheetObjectAddress} from '@tomorrowevening/theatre-shared/utils/addresses'
 import SimpleCache from '@tomorrowevening/theatre-shared/utils/SimpleCache'
 import type {
-  $IntentionalAny,
   DeepPartialOfSerializableValue,
   VoidFn,
 } from '@tomorrowevening/theatre-shared/utils/types'
@@ -141,7 +140,7 @@ export default class TheatreSheetObject<
   }
 
   get props(): Pointer<this['value']> {
-    return privateAPI(this).propsP as $IntentionalAny
+    return privateAPI(this).propsP as unknown as Pointer<this['value']>
   }
 
   get sheet(): ISheet {
@@ -160,7 +159,9 @@ export default class TheatreSheetObject<
     return this._cache.get('_valuesPrism', () => {
       const sheetObject = privateAPI(this)
       const d: Prism<PropsValue<Props>> = prism(() => {
-        return val(sheetObject.getValues().getValue()) as $IntentionalAny
+        return val(
+          sheetObject.getValues().getValue(),
+        ) as unknown as PropsValue<Props>
       })
       return d
     })

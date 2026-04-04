@@ -102,7 +102,7 @@ export const compound = <Props extends UnknownShorthandCompoundProps>(
   > = {
     type: 'compound',
     props: sanitizedProps as $IntentionalAny,
-    valueType: null as $IntentionalAny,
+    valueType: null!,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
     default: mapValues(sanitizedProps, (p) => p.default) as $IntentionalAny,
@@ -121,7 +121,7 @@ export const compound = <Props extends UnknownShorthandCompoundProps>(
       for (const [key, propConfig] of Object.entries(sanitizedProps)) {
         if (Object.prototype.hasOwnProperty.call(json, key)) {
           const deserializedSub = propConfig.deserializeAndSanitize(
-            (json as $IntentionalAny)[key] as unknown,
+            (json as Record<string, unknown>)[key] as unknown,
           )
           if (deserializedSub != null) {
             atLeastOnePropWasDeserialized = true
@@ -179,7 +179,7 @@ export const file = (
   return {
     type: 'file',
     default: {type: 'file', id: defaultValue},
-    valueType: null as $IntentionalAny,
+    valueType: null!,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
     interpolate,
@@ -193,13 +193,15 @@ const _ensureFile = (val: unknown): File | undefined => {
   let valid = true
 
   if (
-    typeof (val as $IntentionalAny).id !== 'string' &&
-    ![null, undefined].includes((val as $IntentionalAny).id)
+    typeof (val as Record<string, unknown>).id !== 'string' &&
+    ![null, undefined].includes(
+      (val as Record<string, unknown>).id as null | undefined,
+    )
   ) {
     valid = false
   }
 
-  if ((val as $IntentionalAny).type !== 'file') valid = false
+  if ((val as Record<string, unknown>).type !== 'file') valid = false
 
   if (!valid) return undefined
 
@@ -247,7 +249,7 @@ export const image = (
   return {
     type: 'image',
     default: {type: 'image', id: defaultValue},
-    valueType: null as $IntentionalAny,
+    valueType: null!,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
     interpolate,
@@ -261,13 +263,15 @@ const _ensureImage = (val: unknown): Asset | undefined => {
   let valid = true
 
   if (
-    typeof (val as $IntentionalAny).id !== 'string' &&
-    ![null, undefined].includes((val as $IntentionalAny).id)
+    typeof (val as Record<string, unknown>).id !== 'string' &&
+    ![null, undefined].includes(
+      (val as Record<string, unknown>).id as null | undefined,
+    )
   ) {
     valid = false
   }
 
-  if ((val as $IntentionalAny).type !== 'image') valid = false
+  if ((val as Record<string, unknown>).type !== 'image') valid = false
 
   if (!valid) return undefined
 
@@ -436,7 +440,7 @@ export const rgba = (
     for (const p of ['r', 'g', 'b', 'a']) {
       if (
         !Object.prototype.hasOwnProperty.call(defaultValue, p) ||
-        typeof (defaultValue as $IntentionalAny)[p] !== 'number'
+        typeof (defaultValue as Record<string, unknown>)[p] !== 'number'
       ) {
         valid = false
       }
@@ -452,15 +456,15 @@ export const rgba = (
   // Clamp defaultValue components between 0 and 1
   const sanitized = {}
   for (const component of ['r', 'g', 'b', 'a']) {
-    ;(sanitized as $IntentionalAny)[component] = Math.min(
-      Math.max((defaultValue as $IntentionalAny)[component], 0),
+    ;(sanitized as Record<string, number>)[component] = Math.min(
+      Math.max((defaultValue as Record<string, number>)[component], 0),
       1,
     )
   }
 
   return {
     type: 'rgba',
-    valueType: null as $IntentionalAny,
+    valueType: null!,
     default: decorateRgba(sanitized as Rgba),
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
@@ -475,7 +479,7 @@ const _sanitizeRgba = (val: unknown): Rgba | undefined => {
   for (const c of ['r', 'g', 'b', 'a']) {
     if (
       !Object.prototype.hasOwnProperty.call(val, c) ||
-      typeof (val as $IntentionalAny)[c] !== 'number'
+      typeof (val as Record<string, unknown>)[c] !== 'number'
     ) {
       valid = false
     }
@@ -486,8 +490,8 @@ const _sanitizeRgba = (val: unknown): Rgba | undefined => {
   // Clamp defaultValue components between 0 and 1
   const sanitized = {}
   for (const c of ['r', 'g', 'b', 'a']) {
-    ;(sanitized as $IntentionalAny)[c] = Math.min(
-      Math.max((val as $IntentionalAny)[c], 0),
+    ;(sanitized as Record<string, number>)[c] = Math.min(
+      Math.max((val as Record<string, number>)[c], 0),
       1,
     )
   }
@@ -556,7 +560,7 @@ export const boolean = (
   return {
     type: 'boolean',
     default: defaultValue,
-    valueType: null as $IntentionalAny,
+    valueType: null!,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
     interpolate: opts.interpolate ?? leftInterpolate,
@@ -613,7 +617,7 @@ export const string = (
   return {
     type: 'string',
     default: defaultValue,
-    valueType: null as $IntentionalAny,
+    valueType: null!,
     [propTypeSymbol]: 'TheatrePropType',
     label: opts.label,
     interpolate: opts.interpolate ?? leftInterpolate,
@@ -672,7 +676,7 @@ export function stringLiteral<
     default: defaultValue,
     valuesAndLabels: {...valuesAndLabels},
     [propTypeSymbol]: 'TheatrePropType',
-    valueType: null as $IntentionalAny,
+    valueType: null!,
     as: opts.as ?? 'menu',
     label: opts.label,
     interpolate: opts.interpolate ?? leftInterpolate,
@@ -681,7 +685,7 @@ export function stringLiteral<
     ): undefined | Extract<keyof ValuesAndLabels, string> {
       if (typeof json !== 'string') return undefined
       if (Object.prototype.hasOwnProperty.call(valuesAndLabels, json)) {
-        return json as $IntentionalAny
+        return json as Extract<keyof ValuesAndLabels, string>
       } else {
         return undefined
       }

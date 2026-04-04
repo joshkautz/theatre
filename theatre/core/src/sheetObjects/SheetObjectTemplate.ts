@@ -18,7 +18,6 @@ import type {
 } from '@tomorrowevening/theatre-shared/utils/ids'
 import SimpleCache from '@tomorrowevening/theatre-shared/utils/SimpleCache'
 import type {
-  $IntentionalAny,
   SerializableMap,
   SerializablePrimitive,
   SerializableValue,
@@ -188,14 +187,22 @@ export default class SheetObjectTemplate {
             .trackIdByPropPath,
         )
 
-        if (!trackIdByPropPath) return emptyArray as $IntentionalAny
+        if (!trackIdByPropPath)
+          return emptyArray as Array<{
+            pathToProp: PathToProp
+            trackId: SequenceTrackId
+          }>
 
         const arrayOfIds: Array<{
           pathToProp: PathToProp
           trackId: SequenceTrackId
         }> = []
 
-        if (!trackIdByPropPath) return emptyArray as $IntentionalAny
+        if (!trackIdByPropPath)
+          return emptyArray as Array<{
+            pathToProp: PathToProp
+            trackId: SequenceTrackId
+          }>
 
         const objectConfig = val(this.configPointer)
 
@@ -230,7 +237,10 @@ export default class SheetObjectTemplate {
         })
 
         if (arrayOfIds.length === 0) {
-          return emptyArray as $IntentionalAny
+          return emptyArray as Array<{
+            pathToProp: PathToProp
+            trackId: SequenceTrackId
+          }>
         } else {
           return arrayOfIds
         }
@@ -306,7 +316,7 @@ export default class SheetObjectTemplate {
     const defaults = this.getDefaultValues().getValue()
 
     const defaultsAtPath = getDeep(defaults, path)
-    return defaultsAtPath as $IntentionalAny
+    return defaultsAtPath as SerializableValue | undefined
   }
 }
 
