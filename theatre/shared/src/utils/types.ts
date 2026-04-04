@@ -86,8 +86,6 @@ export type StrictRecord<Key extends string, V> = {[K in Key]?: V}
  */
 export type IRange<T extends number = number> = {start: T; end: T}
 
-/** For `any`s that aren't meant to stay `any`*/
-export type $FixMe = any
 /** For `any`s that we don't care about */
 export type $IntentionalAny = any
 

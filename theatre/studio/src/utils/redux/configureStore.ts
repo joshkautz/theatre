@@ -14,7 +14,6 @@ interface Conf<State extends {}> {
 export default function configureStore<State extends {}>(
   conf: Conf<State>,
 ): Store<State> {
-  // const middlewares: $FixMe[] = []
   const enhancers = []
 
   if (process.env.NODE_ENV !== 'production') {

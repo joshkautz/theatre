@@ -55,7 +55,7 @@ Wraps an object whose (sub)properties can be individually tracked.
 
 #### Defined in
 
-[Atom.ts:119](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L119)
+[Atom.ts:122](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L122)
 
 ## Properties
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[Atom.ts:115](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L115)
+[Atom.ts:118](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L118)
 
 ## Methods
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[Atom.ts:136](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L136)
+[Atom.ts:139](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L139)
 
 ___
 
@@ -119,7 +119,7 @@ Returns the value at the given pointer
 
 #### Defined in
 
-[Atom.ts:152](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L152)
+[Atom.ts:155](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L155)
 
 ___
 
@@ -151,7 +151,7 @@ Returns a new prism of the value at the provided path.
 
 #### Defined in
 
-[Atom.ts:271](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L271)
+[Atom.ts:274](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L274)
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 #### Defined in
 
-[Atom.ts:170](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L170)
+[Atom.ts:173](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L173)
 
 ___
 
@@ -200,7 +200,7 @@ Reduces the value at the given pointer
 
 #### Defined in
 
-[Atom.ts:186](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L186)
+[Atom.ts:189](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L189)
 
 ___
 
@@ -222,7 +222,7 @@ Sets the state of the atom.
 
 #### Defined in
 
-[Atom.ts:129](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L129)
+[Atom.ts:132](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L132)
 
 ___
 
@@ -251,4 +251,4 @@ Sets the value at the given pointer
 
 #### Defined in
 
-[Atom.ts:211](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L211)
+[Atom.ts:214](https://github.com/theatre-js/theatre/blob/main/packages/dataverse/src/Atom.ts#L214)
