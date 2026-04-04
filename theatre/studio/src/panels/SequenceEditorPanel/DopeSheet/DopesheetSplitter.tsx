@@ -1,5 +1,4 @@
 import useRefAndState from '@tomorrowevening/theatre-studio/utils/useRefAndState'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import type {CommitOrDiscard} from '@tomorrowevening/theatre-studio/StudioStore/StudioStore'
 import useDrag from '@tomorrowevening/theatre-studio/uiComponents/useDrag'
@@ -36,7 +35,9 @@ const DopesheetSplitter: React.FC<{
   layoutP: Pointer<SequenceEditorPanelLayout>
 }> = ({layoutP}) => {
   const leftWidth = useVal(layoutP.leftDims.width)
-  const [ref, node] = useRefAndState<HTMLDivElement>(null as $IntentionalAny)
+  const [ref, node] = useRefAndState<HTMLDivElement>(
+    null as unknown as HTMLDivElement,
+  )
   const widthBeforeDrag = useRef(0)
 
   const dragOpts: Parameters<typeof useDrag>[1] = useMemo(() => {

@@ -2,7 +2,6 @@ import {usePrism, useVal} from '@tomorrowevening/theatre-react'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import React, {useMemo, useRef} from 'react'
 import styled from 'styled-components'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-dataverse/dist/types'
 import useTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/useTooltip'
 import ErrorTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/ErrorTooltip'
 import BasicTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/BasicTooltip'
@@ -171,7 +170,7 @@ const GlobalToolbar: React.FC = () => {
       <SubContainer>
         {triggerTooltip}
         <PinButton
-          ref={triggerButtonRef as $IntentionalAny}
+          ref={triggerButtonRef as React.RefObject<HTMLButtonElement>}
           data-testid="OutlinePanel-TriggerButton"
           onClick={() => {
             getStudio().transaction(({stateEditors, drafts}) => {

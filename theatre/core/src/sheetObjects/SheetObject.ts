@@ -237,7 +237,7 @@ export default class SheetObject implements PointerToPrismProvider {
       return val(
         pointerDeep(allValuesP as $IntentionalAny, path),
       ) as SerializableMap
-    }) as $IntentionalAny as Prism<P>
+    }) as unknown as Prism<P>
   }
 
   /**

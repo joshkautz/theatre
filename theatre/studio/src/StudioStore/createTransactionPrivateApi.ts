@@ -37,7 +37,7 @@ function cloneDeepSerializableAndPrune<T>(v: T): T | undefined {
   ) {
     return v
   } else if (isPlainObject(v)) {
-    const cloned: $IntentionalAny = {}
+    const cloned: Record<string, unknown> = {}
     let clonedAtLeastOneProp = false
     for (const [key, val] of Object.entries(v as {})) {
       const clonedVal = cloneDeepSerializableAndPrune(val)
@@ -47,7 +47,7 @@ function cloneDeepSerializableAndPrune<T>(v: T): T | undefined {
       }
     }
     if (clonedAtLeastOneProp) {
-      return cloned
+      return cloned as T
     }
   } else {
     return undefined

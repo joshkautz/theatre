@@ -1,7 +1,6 @@
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {prism, val} from '@tomorrowevening/theatre-dataverse'
 import {usePrism} from '@tomorrowevening/theatre-react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import {
   panelDimsToPanelPosition,
@@ -72,7 +71,7 @@ const FocusRangeZone: React.FC<{
   return usePrism(() => {
     return (
       <Container
-        ref={containerRef as $IntentionalAny}
+        ref={containerRef as React.RefObject<HTMLDivElement>}
         isShiftDown={isShiftDown}
       >
         <FocusRangeStrip layoutP={layoutP} />

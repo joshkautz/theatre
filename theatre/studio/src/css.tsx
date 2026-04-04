@@ -146,7 +146,7 @@ const ProvideStyledShadow: React.FC<{
   }
 
   return ReactDOM.createPortal(
-    <ProvideStyles target={shadowRoot as $IntentionalAny as HTMLElement}>
+    <ProvideStyles target={shadowRoot as unknown as HTMLElement}>
       <>
         <PortalLayer ref={portalLayerRef} />
         <PortalContext.Provider value={portalLayer}>
@@ -154,6 +154,6 @@ const ProvideStyledShadow: React.FC<{
         </PortalContext.Provider>
       </>
     </ProvideStyles>,
-    shadowRoot as $IntentionalAny as HTMLElement,
+    shadowRoot as unknown as HTMLElement,
   )
 }

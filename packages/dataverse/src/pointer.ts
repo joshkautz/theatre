@@ -184,6 +184,6 @@ export default pointer
 /**
  * Returns whether `p` is a pointer.
  */
-export const isPointer = (p: $IntentionalAny): p is Pointer<unknown> => {
-  return p && !!getPointerMeta(p)
+export const isPointer = (p: unknown): p is Pointer<unknown> => {
+  return !!p && !!getPointerMeta(p as PointerType<unknown>)
 }

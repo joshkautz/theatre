@@ -30,10 +30,9 @@ import {isSheetObject} from '@tomorrowevening/theatre-shared/instanceTypes'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import type {
   SheetId,
-  SheetInstanceId} from '@tomorrowevening/theatre-shared/utils/ids';
-import {
-  generateSequenceSubSequenceId
+  SheetInstanceId,
 } from '@tomorrowevening/theatre-shared/utils/ids'
+import {generateSequenceSubSequenceId} from '@tomorrowevening/theatre-shared/utils/ids'
 
 export type IPlaybackRange = [from: number, to: number]
 
@@ -333,24 +332,24 @@ export default class Sequence implements PointerToPrismProvider {
         playing: val(this.pointer.playing),
         position: val(this.pointer.position),
         subUnitsPerUnit: val(this.pointer.subUnitsPerUnit),
-      })) as $IntentionalAny as Prism<V>
+      })) as unknown as Prism<V>
     }
     if (path.length > 1) {
-      return prism(() => undefined) as $IntentionalAny as Prism<V>
+      return prism(() => undefined) as unknown as Prism<V>
     }
     const [prop] = path
     if (prop === 'length') {
-      return this._lengthD as $IntentionalAny as Prism<V>
+      return this._lengthD as unknown as Prism<V>
     } else if (prop === 'subUnitsPerUnit') {
-      return this._subUnitsPerUnitD as $IntentionalAny as Prism<V>
+      return this._subUnitsPerUnitD as unknown as Prism<V>
     } else if (prop === 'position') {
-      return this._positionD as $IntentionalAny as Prism<V>
+      return this._positionD as unknown as Prism<V>
     } else if (prop === 'playing') {
       return prism(() => {
         return val(this._prismOfStatePointer.getValue().playing)
-      }) as $IntentionalAny as Prism<V>
+      }) as unknown as Prism<V>
     } else {
-      return prism(() => undefined) as $IntentionalAny as Prism<V>
+      return prism(() => undefined) as unknown as Prism<V>
     }
   }
 

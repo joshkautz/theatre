@@ -37,5 +37,5 @@ export default function configureStore<State extends {}>(
     enhancer as $IntentionalAny,
   )
 
-  return store as $IntentionalAny as Store<State>
+  return store as unknown as Store<State>
 }

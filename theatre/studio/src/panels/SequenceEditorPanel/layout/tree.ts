@@ -453,7 +453,7 @@ export const calculateSequenceEditorTree = (
   ) {
     if (conf.type === 'compound') {
       const trackMapping =
-        (trackIdOrMapping as $IntentionalAny as IPropPathToTrackIdTree) || {}
+        (trackIdOrMapping as unknown as IPropPathToTrackIdTree) || {}
       addProp_compound(
         sheetObject,
         trackMapping,

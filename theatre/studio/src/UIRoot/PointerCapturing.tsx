@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useMemo} from 'react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import {useLogger} from '@tomorrowevening/theatre-studio/uiComponents/useLogger'
 
 /** See {@link PointerCapturing} */
@@ -97,7 +96,7 @@ function _usePointerCapturingContext(): PointerCapturingFn {
 }
 
 const PointerCapturingContext = React.createContext<PointerCapturingFn>(
-  null as $IntentionalAny,
+  null as unknown as PointerCapturingFn,
 )
 
 const ProviderChildrenMemo: React.FC<{children?: React.ReactNode}> = React.memo(

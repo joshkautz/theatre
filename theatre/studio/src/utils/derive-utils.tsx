@@ -26,7 +26,7 @@ function deriveAllD<T extends Record<string, $<any>> | $<any>[]>(
       }
       return values
     } else {
-      const values: $IntentionalAny = {}
+      const values: Record<string, unknown> = {}
       for (const k in obj) {
         values[k] = val((obj as Record<string, $<any>>)[k])
       }
@@ -65,7 +65,7 @@ export function deriver<Props extends {}>(
     ) {
       let observableArr = []
       const observables: Record<string, Prism<$IntentionalAny>> = {}
-      const normalProps: Record<string, $IntentionalAny> = {
+      const normalProps: Record<string, unknown> = {
         ref,
       }
       for (const key in props) {

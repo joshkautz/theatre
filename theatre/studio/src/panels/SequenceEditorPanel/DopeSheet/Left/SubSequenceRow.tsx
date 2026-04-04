@@ -6,7 +6,7 @@ import {propNameTextCSS} from '@tomorrowevening/theatre-studio/propEditors/utils
 import {usePropHighlightMouseEnter} from './usePropHighlightMouseEnter'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import useContextMenu from '@tomorrowevening/theatre-studio/uiComponents/simpleContextMenu/useContextMenu'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-dataverse/src/types'
+import type {SheetId} from '@tomorrowevening/theatre-shared/utils/ids'
 import {val} from '@tomorrowevening/theatre-dataverse'
 
 const LeftRowContainer = styled.li<{depth: number}>`
@@ -66,7 +66,7 @@ const SubSequenceRow: React.FC<{
                 stateEditors.studio.historic.projects.stateByProjectId.stateBySheetId.sequenceEditor.updateSubSequence(
                   {
                     sheetAddress: leaf.sheet.address,
-                    subSequenceId: leaf.subSequence.id as $IntentionalAny,
+                    subSequenceId: leaf.subSequence.id,
                     updates: {label: newLabel.trim()},
                   },
                 )
@@ -86,7 +86,7 @@ const SubSequenceRow: React.FC<{
               currentDuration =
                 val(
                   project.pointers.historic.sheetsById[
-                    leaf.subSequence.sheetId as $IntentionalAny
+                    leaf.subSequence.sheetId as unknown as SheetId
                   ].sequence.length,
                 ) ?? 0
             }
@@ -102,7 +102,7 @@ const SubSequenceRow: React.FC<{
                   stateEditors.studio.historic.projects.stateByProjectId.stateBySheetId.sequenceEditor.updateSubSequence(
                     {
                       sheetAddress: leaf.sheet.address,
-                      subSequenceId: leaf.subSequence.id as $IntentionalAny,
+                      subSequenceId: leaf.subSequence.id,
                       updates: {duration},
                     },
                   )
@@ -128,7 +128,7 @@ const SubSequenceRow: React.FC<{
                   stateEditors.studio.historic.projects.stateByProjectId.stateBySheetId.sequenceEditor.updateSubSequence(
                     {
                       sheetAddress: leaf.sheet.address,
-                      subSequenceId: leaf.subSequence.id as $IntentionalAny,
+                      subSequenceId: leaf.subSequence.id,
                       updates: {timeScale},
                     },
                   )
@@ -149,7 +149,7 @@ const SubSequenceRow: React.FC<{
                 stateEditors.studio.historic.projects.stateByProjectId.stateBySheetId.sequenceEditor.removeSubSequence(
                   {
                     sheetAddress: leaf.sheet.address,
-                    subSequenceId: leaf.subSequence.id as $IntentionalAny,
+                    subSequenceId: leaf.subSequence.id,
                   },
                 )
               })

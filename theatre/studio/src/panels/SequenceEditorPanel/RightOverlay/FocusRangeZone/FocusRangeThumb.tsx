@@ -1,7 +1,7 @@
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {prism, val} from '@tomorrowevening/theatre-dataverse'
 import {usePrism, useVal} from '@tomorrowevening/theatre-react'
-import type {$IntentionalAny, IRange} from '@tomorrowevening/theatre-shared/utils/types'
+import type {IRange} from '@tomorrowevening/theatre-shared/utils/types'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import type {SequenceEditorPanelLayout} from '@tomorrowevening/theatre-studio/panels/SequenceEditorPanel/layout/layout'
 import {
@@ -271,7 +271,7 @@ const FocusRangeThumb: React.FC<{
 
     return (
       <TheDiv
-        ref={hitZoneRef as $IntentionalAny}
+        ref={hitZoneRef as React.RefObject<HTMLDivElement>}
         {...DopeSnap.includePositionSnapAttrs(position)}
         {...includeLockFrameStampAttrs(position)}
         className={`${isDragging && 'dragging'} ${enabled && 'enabled'}`}

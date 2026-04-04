@@ -7,7 +7,6 @@ import PanelsRoot from './PanelsRoot'
 import GlobalToolbar from '@tomorrowevening/theatre-studio/toolbars/GlobalToolbar'
 import useRefAndState from '@tomorrowevening/theatre-studio/utils/useRefAndState'
 import {PortalContext} from 'reakit'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import useKeyboardShortcuts from './useKeyboardShortcuts'
 import PointerEventsHandler from '@tomorrowevening/theatre-studio/uiComponents/PointerEventsHandler'
 import TooltipContext from '@tomorrowevening/theatre-studio/uiComponents/Popover/TooltipContext'
@@ -50,7 +49,7 @@ export default function UIRoot(props: {
 }) {
   const studio = getStudio()
   const [portalLayerRef, portalLayer] = useRefAndState<HTMLDivElement>(
-    undefined as $IntentionalAny,
+    undefined as unknown as HTMLDivElement,
   )
 
   const uiRootLogger = createTheatreInternalLogger()

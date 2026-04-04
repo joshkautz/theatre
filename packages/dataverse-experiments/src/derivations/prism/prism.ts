@@ -185,7 +185,7 @@ function ref<T>(key: string, initialValue: T): IRef<T> {
   }
 
   if (refs[key]) {
-    return refs[key] as $IntentionalAny as IRef<T>
+    return refs[key] as IRef<T>
   } else {
     const ref: IRef<T> = {
       current: initialValue,
@@ -271,7 +271,7 @@ function memo<T>(
     memo.deps = deps
   }
 
-  return memo.cachedValue as $IntentionalAny as T
+  return memo.cachedValue as T
 }
 
 function state<T>(key: string, initialValue: T): [T, (val: T) => void] {
@@ -304,7 +304,7 @@ function scope<T>(key: string, fn: () => T): T {
   hookScopeStack.push(subScope)
   const ret = safelyRun(fn, undefined).returnValue
   hookScopeStack.pop()
-  return ret as $IntentionalAny as T
+  return ret as T
 }
 
 type IPrismFn = {

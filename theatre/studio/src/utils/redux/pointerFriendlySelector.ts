@@ -19,7 +19,7 @@ type PointerFriendlySelector<S, R, Args extends $IntentionalAny[]> = <
 const pointerFriendlySelector = <S, R, Args extends $IntentionalAny[]>(
   fn: (s: S, ...args: Args) => R,
 ): PointerFriendlySelector<S, R, Args> => {
-  return fn as $IntentionalAny as PointerFriendlySelector<S, R, Args>
+  return fn as unknown as PointerFriendlySelector<S, R, Args>
 }
 
 export default pointerFriendlySelector

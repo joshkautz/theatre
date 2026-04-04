@@ -1,10 +1,7 @@
 import {prism, val} from '@tomorrowevening/theatre-dataverse'
 import {usePrism} from '@tomorrowevening/theatre-react'
 import type {UIPanelId} from '@tomorrowevening/theatre-shared/utils/ids'
-import type {
-  $IntentionalAny,
-  VoidFn,
-} from '@tomorrowevening/theatre-shared/utils/types'
+import type {VoidFn} from '@tomorrowevening/theatre-shared/utils/types'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import type {PanelPosition} from '@tomorrowevening/theatre-studio/store/types'
 import useLockSet from '@tomorrowevening/theatre-studio/uiComponents/useLockSet'
@@ -106,7 +103,9 @@ export const panelDimsToPanelPosition = (
   return position
 }
 
-const PanelContext = React.createContext<PanelStuff>(null as $IntentionalAny)
+const PanelContext = React.createContext<PanelStuff>(
+  null as unknown as PanelStuff,
+)
 
 export const usePanel = () => useContext(PanelContext)
 

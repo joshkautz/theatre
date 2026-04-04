@@ -12,5 +12,5 @@ export default function setDeepImmutable<S>(
   path: PathToProp,
   replace: $IntentionalAny,
 ): S {
-  return updateImmutable(obj, path, () => replace) as $IntentionalAny as S
+  return updateImmutable(obj, path, () => replace) as unknown as S
 }

@@ -3,7 +3,6 @@ import RoomToClick from '@tomorrowevening/theatre-studio/uiComponents/RoomToClic
 import useDrag from '@tomorrowevening/theatre-studio/uiComponents/useDrag'
 import useRefAndState from '@tomorrowevening/theatre-studio/utils/useRefAndState'
 import {usePrism, useVal} from '@tomorrowevening/theatre-react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {val} from '@tomorrowevening/theatre-dataverse'
 import clamp from 'lodash-es/clamp'
@@ -290,7 +289,7 @@ const Playhead: React.FC<{layoutP: Pointer<SequenceEditorPanelLayout>}> = ({
           {...includeLockFrameStampAttrs('hide')}
         >
           <Thumb
-            ref={thumbRef as $IntentionalAny}
+            ref={thumbRef as React.RefObject<HTMLDivElement>}
             {...DopeSnap.includePositionSnapAttrs(posInUnitSpace)}
           >
             <RoomToClick room={8} />

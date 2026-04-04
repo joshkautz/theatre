@@ -84,7 +84,7 @@ export const compoundHasSimpleDescendants = memoizeFn(
 
     for (const key in conf.props) {
       const subConf = conf.props[
-        key as $IntentionalAny as keyof typeof conf.props
+        key as keyof typeof conf.props
       ] as PropTypeConfig
       if (isPropConfigComposite(subConf)) {
         if (compoundHasSimpleDescendants(subConf)) {

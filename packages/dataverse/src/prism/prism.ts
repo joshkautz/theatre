@@ -33,9 +33,7 @@ class HotHandle<V> {
 
   protected _possiblyStaleDeps = new Set<Prism<unknown>>()
 
-  private _scope: HotScope = new HotScope(
-    this as $IntentionalAny as HotHandle<unknown>,
-  )
+  private _scope: HotScope = new HotScope(this as unknown as HotHandle<unknown>)
 
   /**
    * @internal
@@ -259,7 +257,7 @@ class PrismInstance<V> implements Prism<V> {
     // if the caller wants the listener to be called immediately, call it now
     if (immediate) {
       lastValue = this.getValue()
-      listener(lastValue as $IntentionalAny as V)
+      listener(lastValue as V)
     }
 
     // the unsubscribe function
@@ -400,7 +398,7 @@ class HotScope implements PrismScope {
   ref<T>(key: string, initialValue: T): IRef<T> {
     let ref = this._refs.get(key)
     if (ref !== undefined) {
-      return ref as $IntentionalAny as IRef<T>
+      return ref as IRef<T>
     } else {
       const ref = {
         current: initialValue,
@@ -473,7 +471,7 @@ class HotScope implements PrismScope {
       memo.deps = deps
     }
 
-    return memo.cachedValue as $IntentionalAny as T
+    return memo.cachedValue as T
   }
 
   state<T>(key: string, initialValue: T): [T, (val: T) => void] {
@@ -735,7 +733,7 @@ function scope<T>(key: string, fn: () => T): T {
   hookScopeStack.push(subScope)
   const ret = safelyRun(fn, undefined).value
   hookScopeStack.pop()
-  return ret as $IntentionalAny as T
+  return ret as T
 }
 
 /**

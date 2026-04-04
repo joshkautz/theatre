@@ -1,5 +1,8 @@
 import useRefAndState from '@tomorrowevening/theatre-studio/utils/useRefAndState'
-import type {$IntentionalAny, VoidFn} from '@tomorrowevening/theatre-shared/utils/types'
+import type {
+  $IntentionalAny,
+  VoidFn,
+} from '@tomorrowevening/theatre-shared/utils/types'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import type {CommitOrDiscard} from '@tomorrowevening/theatre-studio/StudioStore/StudioStore'
 import useDrag from '@tomorrowevening/theatre-studio/uiComponents/useDrag'
@@ -21,7 +24,9 @@ const PanelDragZone: React.FC<
   const panelStuffRef = useRef(panelStuff)
   panelStuffRef.current = panelStuff
 
-  const [ref, node] = useRefAndState<HTMLDivElement>(null as $IntentionalAny)
+  const [ref, node] = useRefAndState<HTMLDivElement>(
+    null as unknown as HTMLDivElement,
+  )
 
   const dragOpts: Parameters<typeof useDrag>[1] = useMemo(() => {
     return {

@@ -1,4 +1,3 @@
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import React, {
   createContext,
   useContext,
@@ -44,7 +43,7 @@ type Context = {
 
 type Lock = {className: string; cursor?: string}
 
-const context = createContext<Context>({} as $IntentionalAny)
+const context = createContext<Context>(null as unknown as Context)
 
 const PointerEventsHandler: React.FC<{
   className?: string

@@ -45,7 +45,7 @@ export default function forEachPropDeep<
 ): void {
   if (typeof m === 'object' && m) {
     if (isImage(m) || isRGBA(m)) {
-      fn(m as $IntentionalAny as Primitive, startingPath)
+      fn(m as unknown as Primitive, startingPath)
       return
     }
     for (const [key, value] of Object.entries(m)) {
@@ -54,7 +54,7 @@ export default function forEachPropDeep<
   } else if (m === undefined || m === null) {
     return
   } else {
-    fn(m as $IntentionalAny as Primitive, startingPath)
+    fn(m as unknown as Primitive, startingPath)
   }
 }
 

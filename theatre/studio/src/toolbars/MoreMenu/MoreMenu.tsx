@@ -1,5 +1,4 @@
 import {useVal} from '@tomorrowevening/theatre-react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import React from 'react'
 import styled from 'styled-components'
@@ -121,7 +120,7 @@ const MoreMenu = React.forwardRef((props: {}, ref) => {
   )
 
   return (
-    <Container ref={ref as $IntentionalAny}>
+    <Container ref={ref as React.RefObject<HTMLDivElement>}>
       <Link
         as="a"
         href="https://www.theatrejs.com/docs/latest"

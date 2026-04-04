@@ -1,4 +1,3 @@
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import {pointerEventsAutoInNormalMode} from '@tomorrowevening/theatre-studio/css'
 import {transparentize} from 'polished'
 import React from 'react'
@@ -45,7 +44,10 @@ const BasicPopover: React.FC<{
     ref,
   ) => {
     return (
-      <Container className={className} ref={ref as $IntentionalAny}>
+      <Container
+        className={className}
+        ref={ref as React.RefObject<HTMLDivElement>}
+      >
         {showPopoverEdgeTriangle ? <PopoverArrow /> : undefined}
         {children}
       </Container>

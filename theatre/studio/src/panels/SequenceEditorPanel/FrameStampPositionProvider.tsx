@@ -1,7 +1,6 @@
 import type {Prism, Pointer} from '@tomorrowevening/theatre-dataverse'
 import {Atom, prism, val} from '@tomorrowevening/theatre-dataverse'
 import mousePositionD from '@tomorrowevening/theatre-studio/utils/mousePositionD'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import {inRange, last} from 'lodash-es'
 import React, {
   createContext,
@@ -28,7 +27,12 @@ export enum FrameStampPositionType {
 const context = createContext<{
   currentD: Prism<[pos: number, posType: FrameStampPositionType]>
   getLock(): FrameStampPositionLock
-}>(null as $IntentionalAny)
+}>(
+  null as unknown as {
+    currentD: Prism<[pos: number, posType: FrameStampPositionType]>
+    getLock(): FrameStampPositionLock
+  },
+)
 
 type LockItem = {
   position: [

@@ -1,7 +1,6 @@
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {prism, val} from '@tomorrowevening/theatre-dataverse'
 import {usePrism, useVal} from '@tomorrowevening/theatre-react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import {pointerEventsAutoInNormalMode} from '@tomorrowevening/theatre-studio/css'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import type {SequenceEditorPanelLayout} from '@tomorrowevening/theatre-studio/panels/SequenceEditorPanel/layout/layout'
@@ -287,7 +286,7 @@ const FocusRangeStrip: React.FC<{
           className={`${isDragging ? 'dragging' : ''} ${
             existingRange.enabled ? 'enabled' : ''
           }`}
-          ref={rangeStripRef as $IntentionalAny}
+          ref={rangeStripRef as React.RefObject<HTMLDivElement>}
           style={{
             transform: `translateX(${translateX}px) scale(${scaleX}, 1)`,
           }}

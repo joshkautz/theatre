@@ -8,7 +8,6 @@ import type {
 import ToolbarIconButton from '@tomorrowevening/theatre-studio/uiComponents/toolbar/ToolbarIconButton'
 import BaseMenu from '@tomorrowevening/theatre-studio/uiComponents/simpleContextMenu/ContextMenu/BaseMenu'
 import usePopover from '@tomorrowevening/theatre-studio/uiComponents/Popover/usePopover'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 
 const Container = styled.div`
   ${pointerEventsAutoInNormalMode};
@@ -67,7 +66,7 @@ const ExtensionFlyoutMenu: React.FC<{
     <Container>
       {popover.node}
       <ToolbarIconButton
-        ref={triggerRef as $IntentionalAny}
+        ref={triggerRef as React.RefObject<HTMLButtonElement>}
         onClick={(e) => {
           popover.open(e, triggerRef.current!)
         }}
