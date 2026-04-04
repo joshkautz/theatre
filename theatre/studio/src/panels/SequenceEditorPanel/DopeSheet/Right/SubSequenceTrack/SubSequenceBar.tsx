@@ -67,7 +67,7 @@ const Bar = styled.div.attrs<{$color: string}>((props) => ({
   style: {
     background: props.$color,
   },
-}))`
+}))<{$color: string}>`
   position: absolute;
   height: ${BAR_HEIGHT}px;
   line-height: ${BAR_HEIGHT}px;
@@ -148,7 +148,7 @@ const LeftHandle = styled(Handle).attrs<{$color: string}>((props) => ({
   style: {
     background: props.$color,
   },
-}))`
+}))<{$color: string}>`
   border-right: 1px solid rgba(0, 0, 0, 0.25);
   left: -7px;
 `
@@ -157,7 +157,7 @@ const RightHandle = styled(Handle).attrs<{$color: string}>((props) => ({
   style: {
     background: props.$color,
   },
-}))`
+}))<{$color: string}>`
   border-left: 1px solid rgba(0, 0, 0, 0.25);
   right: -7px;
 `
