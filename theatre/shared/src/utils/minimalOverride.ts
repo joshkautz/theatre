@@ -1,5 +1,4 @@
 import isPlainObject from 'lodash-es/isPlainObject'
-import type {$IntentionalAny} from './types'
 
 enum ValueType {
   Opaque = 0,
@@ -75,14 +74,15 @@ export default function minimalOverride<T extends {}>(base: T, override: T): T {
     return minimalOverrideObject(base, override)
   } else {
     return minimalOverrideArray(
-      base as $IntentionalAny,
-      override,
-    ) as $IntentionalAny
+      base as unknown as unknown[],
+      override as unknown as unknown[],
+    ) as unknown as T
   }
 }
 
 function minimalOverrideObject<T extends {}>(base: T, override: T): T {
-  const o: $IntentionalAny = {}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const o: any = {}
   let atLeastOneKeyWasDifferent = false
   const keysOfOverride = Object.keys(override) as Array<keyof T>
   for (const key of keysOfOverride) {
@@ -106,10 +106,7 @@ function minimalOverrideObject<T extends {}>(base: T, override: T): T {
   }
 }
 
-function minimalOverrideArray<T extends $IntentionalAny[]>(
-  base: T,
-  override: T,
-): T {
+function minimalOverrideArray<T extends unknown[]>(base: T, override: T): T {
   if (base.length !== override.length) return override
   // Arrays are expected to only hold opaque values, so we'll only
   // check for shallow equality here.

@@ -8,10 +8,7 @@ import type Scrub from '@tomorrowevening/theatre-studio/Scrub'
 import type {IContextMenuItem} from '@tomorrowevening/theatre-studio/uiComponents/simpleContextMenu/useContextMenu'
 import getDeep from '@tomorrowevening/theatre-shared/utils/getDeep'
 import {usePrismInstance} from '@tomorrowevening/theatre-react'
-import type {
-  $IntentionalAny,
-  SerializablePrimitive as SerializablePrimitive,
-} from '@tomorrowevening/theatre-shared/utils/types'
+import type {SerializablePrimitive as SerializablePrimitive} from '@tomorrowevening/theatre-shared/utils/types'
 import type {PropTypeConfig_AllSimples} from '@tomorrowevening/theatre-core/propTypes'
 import {isPropConfSequencable} from '@tomorrowevening/theatre-shared/propTypes/utils'
 import type {SequenceTrackId} from '@tomorrowevening/theatre-shared/utils/ids'
@@ -20,7 +17,10 @@ import type {NearbyKeyframes} from './getNearbyKeyframesOfTrack'
 import {getNearbyKeyframesOfTrack} from './getNearbyKeyframesOfTrack'
 import type {NearbyKeyframesControls} from './NextPrevKeyframeCursors'
 import NextPrevKeyframeCursors from './NextPrevKeyframeCursors'
-import type {Asset, File as AssetFile} from '@tomorrowevening/theatre-shared/utils/assets'
+import type {
+  Asset,
+  File as AssetFile,
+} from '@tomorrowevening/theatre-shared/utils/assets'
 
 interface EditingToolsCommon<T> {
   value: T
@@ -59,7 +59,8 @@ type EditingTools<T> =
   | EditingToolsStatic<T>
   | EditingToolsSequenced<T>
 
-const cache = new WeakMap<{}, Prism<EditingTools<$IntentionalAny>>>()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const cache = new WeakMap<{}, Prism<EditingTools<any>>>()
 
 /**
  * Note: we're able to get `obj` and `propConfig` from `pointerToProp`,

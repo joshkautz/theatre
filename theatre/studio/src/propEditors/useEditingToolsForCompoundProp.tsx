@@ -3,10 +3,7 @@ import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import type {IContextMenuItem} from '@tomorrowevening/theatre-studio/uiComponents/simpleContextMenu/useContextMenu'
 import getDeep from '@tomorrowevening/theatre-shared/utils/getDeep'
 import {usePrism} from '@tomorrowevening/theatre-react'
-import type {
-  $IntentionalAny,
-  SerializablePrimitive,
-} from '@tomorrowevening/theatre-shared/utils/types'
+import type {SerializablePrimitive} from '@tomorrowevening/theatre-shared/utils/types'
 import {getPointerParts, prism, val} from '@tomorrowevening/theatre-dataverse'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import get from 'lodash-es/get'
@@ -167,7 +164,9 @@ export function useEditingToolsForCompoundProp<T extends SerializablePrimitive>(
               stateEditors.coreByProject.historic.sheetsById.sequence.setPrimitivePropAsStatic(
                 {
                   ...propAddress,
-                  value: obj.getValueByPointer(pointerToSub as $IntentionalAny),
+                  value: obj.getValueByPointer(
+                    pointerToSub as Pointer<SerializablePrimitive>,
+                  ),
                 },
               )
             }

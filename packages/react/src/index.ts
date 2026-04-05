@@ -11,7 +11,6 @@ import queueMicrotask from 'queue-microtask'
 import {useCallback, useLayoutEffect, useRef, useState} from 'react'
 import {unstable_batchedUpdates} from 'react-dom'
 
-type $IntentionalAny = any
 type VoidFn = () => void
 
 /**
@@ -50,7 +49,7 @@ export function usePrism<T>(
   debugLabel?: string,
 ): T {
   const fnAsCallback = useCallback(fn, deps)
-  const atomRef = useRef<Atom<typeof fn>>(null as $IntentionalAny)
+  const atomRef = useRef<Atom<typeof fn>>(null!)
   if (!atomRef.current) {
     atomRef.current = new Atom(fnAsCallback)
   } else {
@@ -69,7 +68,8 @@ export function usePrism<T>(
   return usePrismInstance(prismRef.current, debugLabel)
 }
 
-export const useVal: typeof val = (p: $IntentionalAny, debugLabel?: string) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useVal: typeof val = (p: any, debugLabel?: string) => {
   return usePrism(() => val(p), [p], debugLabel)
 }
 
@@ -298,7 +298,7 @@ function queueIfNeeded() {
 export function usePrismInstance<T>(der: Prism<T>, debugLabel?: string): T {
   const _forceUpdate = useForceUpdate(debugLabel)
 
-  const ref = useRef<QueueItem<T>>(undefined as $IntentionalAny)
+  const ref = useRef<QueueItem<T>>(undefined!)
 
   if (!ref.current) {
     lastOrder++
@@ -311,7 +311,7 @@ export function usePrismInstance<T>(der: Prism<T>, debugLabel?: string): T {
         }
       },
       der,
-      lastValue: undefined as $IntentionalAny,
+      lastValue: undefined!,
       unmounted: false,
       queueUpdate: () => {
         if (TRACE) {
@@ -401,7 +401,7 @@ export function usePrismInstance<T>(der: Prism<T>, debugLabel?: string): T {
  * ```
  */
 export function useAtom<T>(initialState: T): Atom<T> {
-  const ref = useRef<Atom<T>>(undefined as $IntentionalAny)
+  const ref = useRef<Atom<T>>(undefined!)
   if (!ref.current) {
     ref.current = new Atom(initialState)
   }

@@ -9,7 +9,6 @@ import {setCollapsedSheetItem} from '@tomorrowevening/theatre-studio/panels/Sequ
 import {useEditingToolsForCompoundProp} from '@tomorrowevening/theatre-studio/propEditors/useEditingToolsForCompoundProp'
 import pointerDeep from '@tomorrowevening/theatre-shared/utils/pointerDeep'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 
 export const decideRowByPropType = (
   leaf: SequenceEditorTree_PropWithChildren | SequenceEditorTree_PrimitiveProp,
@@ -38,7 +37,7 @@ const PropWithChildrenRow: React.VFC<{
   const pointerToProp = pointerDeep(
     leaf.sheetObject.propsP,
     leaf.pathToProp,
-  ) as Pointer<$IntentionalAny>
+  ) as Pointer<{}>
 
   const tools = useEditingToolsForCompoundProp(
     pointerToProp,

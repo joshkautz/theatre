@@ -1,5 +1,5 @@
 import type {PathToProp} from './addresses'
-import type {$IntentionalAny, SerializableMap} from './types'
+import type {SerializableMap} from './types'
 
 /**
  * Mutates `base` to remove the path `path` from it. And if deleting a key makes
@@ -29,7 +29,7 @@ export default function removePathFromObject(
   // if path is ['a', 'b', 'c'], then this will be ['a', 'b']
   const keysUpToLastKey = path.slice(0, path.length - 1)
 
-  let cur: $IntentionalAny = base
+  let cur: Record<string, unknown> = base as Record<string, unknown>
 
   // we use this weakmap to be able to get the parent of a a child object
   const childToParentMapping = new WeakMap()
@@ -48,7 +48,7 @@ export default function removePathFromObject(
     } else {
       // the path _does_ exist so far. let's note the parent-child relationship.
       childToParentMapping.set(child, parent)
-      cur = child
+      cur = child as Record<string, unknown>
     }
   }
   // if path is ['a', 'b', 'c'], then this will be ['c', 'b', 'a']
@@ -64,7 +64,7 @@ export default function removePathFromObject(
       return
     } else {
       // otherwise, we need to delete the parent object too.
-      cur = childToParentMapping.get(cur)!
+      cur = childToParentMapping.get(cur)! as Record<string, unknown>
       continue
     }
   }

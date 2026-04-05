@@ -1,7 +1,6 @@
 import {isPrism, prism, val} from '@tomorrowevening/theatre-dataverse'
 import type {Prism, Pointer} from '@tomorrowevening/theatre-dataverse'
 import {usePrismInstance} from '@tomorrowevening/theatre-react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import React, {useMemo, useRef} from 'react'
 import {invariant} from './invariant'
 
@@ -32,7 +31,7 @@ function deriveAllD<T extends Record<string, $<any>> | $<any>[]>(
       }
       return values
     }
-  }) as $IntentionalAny
+  }) as DeriveAll<T>
 }
 
 /** This is only used for type checking to make sure the APIs are used properly */
@@ -60,11 +59,11 @@ export function deriver<Props extends {}>(
 ): ReactDeriver<Omit<Props, keyof JSX.IntrinsicAttributes>> {
   const finalComp = React.memo(
     React.forwardRef(function deriverRender(
-      props: Record<string, $IntentionalAny>,
+      props: Record<string, unknown>,
       ref,
     ) {
       let observableArr = []
-      const observables: Record<string, Prism<$IntentionalAny>> = {}
+      const observables: Record<string, Prism<unknown>> = {}
       const normalProps: Record<string, unknown> = {
         ref,
       }
@@ -100,5 +99,7 @@ export function deriver<Props extends {}>(
 
   finalComp.displayName = `deriver(${Component.displayName})`
 
-  return finalComp as $IntentionalAny
+  return finalComp as unknown as ReactDeriver<
+    Omit<Props, keyof JSX.IntrinsicAttributes>
+  >
 }

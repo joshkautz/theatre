@@ -1,4 +1,3 @@
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import {useEffect} from 'react'
 
 export default function useOnClickOutside(
@@ -31,7 +30,7 @@ export default function useOnClickOutside(
       window.removeEventListener('mousedown', onMouseDown, {
         capture: true,
         passive: false,
-      } as unknown as $IntentionalAny)
+      } as EventListenerOptions)
     }
   }, [container, enabled])
 }

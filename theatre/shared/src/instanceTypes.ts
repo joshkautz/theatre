@@ -1,10 +1,13 @@
-import type {IProject, ISheet, ISheetObject} from '@tomorrowevening/theatre-core'
+import type {
+  IProject,
+  ISheet,
+  ISheetObject,
+} from '@tomorrowevening/theatre-core'
 import type Project from '@tomorrowevening/theatre-core/projects/Project'
 import type SheetObject from '@tomorrowevening/theatre-core/sheetObjects/SheetObject'
 import type SheetObjectTemplate from '@tomorrowevening/theatre-core/sheetObjects/SheetObjectTemplate'
 import type Sheet from '@tomorrowevening/theatre-core/sheets/Sheet'
 import type SheetTemplate from '@tomorrowevening/theatre-core/sheets/SheetTemplate'
-import type {$IntentionalAny} from './utils/types'
 import type Sequence from '@tomorrowevening/theatre-core/sequences/Sequence'
 
 /**
@@ -43,5 +46,5 @@ function typeAsserter<T extends {type: string}>(
   t: T['type'],
 ): (v: unknown) => v is T {
   return (v: unknown): v is T =>
-    typeof v === 'object' && !!v && (v as $IntentionalAny).type === t
+    typeof v === 'object' && !!v && (v as Record<string, unknown>).type === t
 }

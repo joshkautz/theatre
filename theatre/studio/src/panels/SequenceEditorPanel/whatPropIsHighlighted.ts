@@ -8,7 +8,7 @@ import type {
 } from '@tomorrowevening/theatre-shared/utils/addresses'
 
 import pointerDeep from '@tomorrowevening/theatre-shared/utils/pointerDeep'
-import type {$IntentionalAny, VoidFn} from '@tomorrowevening/theatre-shared/utils/types'
+import type {VoidFn} from '@tomorrowevening/theatre-shared/utils/types'
 import lodashSet from 'lodash-es/set'
 
 /** constant global manager */
@@ -92,5 +92,5 @@ function arrayToDeepObject(
 ): PathToPropAsDeepObject<boolean> {
   const obj = {}
   lodashSet(obj, arr, true)
-  return obj as $IntentionalAny
+  return obj as PathToPropAsDeepObject<boolean>
 }

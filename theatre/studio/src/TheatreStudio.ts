@@ -7,11 +7,8 @@ import type {
 import type {Prism, Pointer} from '@tomorrowevening/theatre-dataverse'
 import {prism} from '@tomorrowevening/theatre-dataverse'
 import SimpleCache from '@tomorrowevening/theatre-shared/utils/SimpleCache'
-import type {
-  $IntentionalAny,
-  VoidFn,
-} from '@tomorrowevening/theatre-shared/utils/types'
-import type {IScrub} from '@tomorrowevening/theatre-studio/Scrub'
+import type {VoidFn} from '@tomorrowevening/theatre-shared/utils/types'
+import type {IScrub, IScrubApi} from '@tomorrowevening/theatre-studio/Scrub'
 import type {Studio} from '@tomorrowevening/theatre-studio/Studio'
 
 import {
@@ -546,7 +543,9 @@ export default class TheatreStudio implements IStudio {
     __experimental_createContentOfSaveFileTyped(
       projectId: string,
     ): __UNSTABLE_Project_OnDiskState {
-      return getStudio().createContentOfSaveFile(projectId) as $IntentionalAny
+      return getStudio().createContentOfSaveFile(
+        projectId,
+      ) as unknown as __UNSTABLE_Project_OnDiskState
     },
   }
 
@@ -664,7 +663,7 @@ export default class TheatreStudio implements IStudio {
       s.commit()
     }, threshold)
 
-    const capture = (arg: $IntentionalAny) => {
+    const capture = (arg: (api: IScrubApi) => void) => {
       if (!currentScrub) {
         currentScrub = this.scrub()
       }
@@ -700,6 +699,6 @@ export default class TheatreStudio implements IStudio {
   createContentOfSaveFile(projectId: string): Record<string, unknown> {
     return getStudio().createContentOfSaveFile(
       projectId as ProjectId,
-    ) as $IntentionalAny
+    ) as unknown as Record<string, unknown>
   }
 }

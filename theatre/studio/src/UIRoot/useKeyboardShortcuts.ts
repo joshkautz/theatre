@@ -2,7 +2,6 @@ import {useEffect} from 'react'
 import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import {cmdIsDown} from '@tomorrowevening/theatre-studio/utils/keyboardUtils'
 import {getSelectedSequence} from '@tomorrowevening/theatre-studio/selectors'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import type {Prism} from '@tomorrowevening/theatre-dataverse'
 import {Atom, prism, val} from '@tomorrowevening/theatre-dataverse'
 import type {IPlaybackRange} from '@tomorrowevening/theatre-core/sequences/Sequence'
@@ -22,8 +21,7 @@ export default function useKeyboardShortcuts() {
   const studio = getStudio()
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const target: null | HTMLElement =
-        e.composedPath()[0] as unknown as $IntentionalAny
+      const target: null | HTMLElement = e.composedPath()[0] as HTMLElement
       if (
         target &&
         (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')

@@ -3,8 +3,8 @@ import getStudio from '@tomorrowevening/theatre-studio/getStudio'
 import {encodePathToProp} from '@tomorrowevening/theatre-shared/utils/addresses'
 import pointerDeep from '@tomorrowevening/theatre-shared/utils/pointerDeep'
 import {usePrism} from '@tomorrowevening/theatre-react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
+import type {SerializablePrimitive} from '@tomorrowevening/theatre-shared/utils/types'
 import {val} from '@tomorrowevening/theatre-dataverse'
 import React, {useCallback, useRef} from 'react'
 import styled from 'styled-components'
@@ -110,7 +110,7 @@ const PrimitivePropRow: React.FC<{
   const pointerToProp = pointerDeep(
     leaf.sheetObject.propsP,
     leaf.pathToProp,
-  ) as Pointer<$IntentionalAny>
+  ) as Pointer<SerializablePrimitive>
 
   const obj = leaf.sheetObject
   const editingTools = useEditingToolsForSimplePropInDetailsPanel(

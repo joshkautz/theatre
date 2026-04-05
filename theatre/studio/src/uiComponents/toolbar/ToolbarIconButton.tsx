@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import {pointerEventsAutoInNormalMode} from '@tomorrowevening/theatre-studio/css'
 import React from 'react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import useTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/useTooltip'
 import {mergeRefs} from 'react-merge-refs'
 import MinimalTooltip from '@tomorrowevening/theatre-studio/uiComponents/Popover/MinimalTooltip'
@@ -84,6 +83,6 @@ const ToolbarIconButton: typeof Container = React.forwardRef(
       </>
     )
   },
-) as $IntentionalAny
+) as unknown as typeof Container
 
 export default ToolbarIconButton

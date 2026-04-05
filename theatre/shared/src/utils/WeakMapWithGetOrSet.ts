@@ -1,5 +1,3 @@
-import type {$IntentionalAny} from './types'
-
 /**
  * A wrapper around a WeakMap that adds a convenient `getOrSet` method.
  */
@@ -14,7 +12,7 @@ export default class WeakMapWithGetOrSet<
    */
   getOrSet<T extends V>(key: K, producer: () => T): T {
     if (this.has(key)) {
-      return this.get(key) as $IntentionalAny
+      return this.get(key) as T
     } else {
       const cachedValue = producer()
       this.set(key, cachedValue)

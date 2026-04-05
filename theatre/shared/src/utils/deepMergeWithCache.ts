@@ -1,4 +1,3 @@
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import type {DeepPartialOfSerializableValue, SerializableMap} from './types'
 
 /**
@@ -56,7 +55,13 @@ export default function deepMergeWithCache<T extends SerializableMap>(
       override: DeepPartialOfSerializableValue<T>
       merged: DeepPartialOfSerializableValue<T>
     }
-  > = cache as $IntentionalAny
+  > = cache as unknown as WeakMap<
+    SerializableMap,
+    {
+      override: DeepPartialOfSerializableValue<T>
+      merged: DeepPartialOfSerializableValue<T>
+    }
+  >
 
   const possibleCachedValue = _cache.get(base)
 

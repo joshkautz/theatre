@@ -1,4 +1,3 @@
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import type React from 'react'
 import {getMounter} from './renderInPortalInContext'
 
@@ -37,10 +36,11 @@ export function registerContextualWebComponent<Props>(
       const props = Object.fromEntries(
         propList.map((propName) => [
           propName,
-          this.getAttribute(propName as $IntentionalAny),
+          this.getAttribute(propName as string),
         ]),
       )
-      this._mountOrRender(ReactComponent, props as $IntentionalAny, this)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._mountOrRender(ReactComponent, props as any, this)
     }
 
     attributeChangedCallback() {

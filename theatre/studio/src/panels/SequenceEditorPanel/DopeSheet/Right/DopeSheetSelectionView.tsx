@@ -6,7 +6,6 @@ import useValToAtom from '@tomorrowevening/theatre-studio/uiComponents/useValToA
 import mutableSetDeep from '@tomorrowevening/theatre-shared/utils/mutableSetDeep'
 import useRefAndState from '@tomorrowevening/theatre-studio/utils/useRefAndState'
 import {usePrism} from '@tomorrowevening/theatre-react'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {val} from '@tomorrowevening/theatre-dataverse'
 import React, {useMemo, useRef} from 'react'
@@ -321,13 +320,7 @@ namespace utils {
 
     const collector = collectorByLeafType[leaf.type]
     if (collector) {
-      collector(
-        logger,
-        layout,
-        leaf as $IntentionalAny,
-        bounds,
-        selectionByObjectKey,
-      )
+      collector(logger, layout, leaf as never, bounds, selectionByObjectKey)
     } else {
       collectChildren(logger, layout, leaf, bounds, selectionByObjectKey)
     }

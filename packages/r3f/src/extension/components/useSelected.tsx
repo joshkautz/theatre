@@ -6,7 +6,6 @@ import {
 } from '@tomorrowevening/theatre-r3f'
 import studio from '@tomorrowevening/theatre-studio'
 import type {ISheetObject} from '@tomorrowevening/theatre-core'
-import type {$IntentionalAny} from '../../types'
 
 export function useSelected(): undefined | string {
   const [state, set] = useState<string | undefined>(undefined)
@@ -18,7 +17,7 @@ export function useSelected(): undefined | string {
       const item = selection.find(
         (s): s is ISheetObject =>
           s.type === 'Theatre_SheetObject_PublicAPI' &&
-          allRegisteredObjects.has(s as $IntentionalAny),
+          allRegisteredObjects.has(s as ISheetObject),
       )
       if (!item) {
         set(undefined)
@@ -37,7 +36,7 @@ export function getSelected(): undefined | string {
   const item = studio.selection.find(
     (s): s is ISheetObject =>
       s.type === 'Theatre_SheetObject_PublicAPI' &&
-      allRegisteredObjects.has(s as $IntentionalAny),
+      allRegisteredObjects.has(s as ISheetObject),
   )
   if (!item) {
     return undefined

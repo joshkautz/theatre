@@ -12,7 +12,6 @@ import type {ISheet} from '@tomorrowevening/theatre-core'
 import {types} from '@tomorrowevening/theatre-core'
 import type {ISheetObject} from '@tomorrowevening/theatre-core'
 import {useThree} from '@react-three/fiber'
-import type {$IntentionalAny} from '../../types'
 
 const camConf = {
   transform: {
@@ -110,7 +109,7 @@ function usePassValuesFromOrbitControlsToTheatre(
       | {
           /** "debounce" like timer for making commits to the orbit's changes */
           scheduledCommit?: {
-            timer: $IntentionalAny
+            timer: number
             // Future, might be possible to remember the position we need to apply this scrub to (when the last 'end' event was received)
             // position: number
           }
@@ -127,7 +126,7 @@ function usePassValuesFromOrbitControlsToTheatre(
               currentScrub.scrub.commit()
               currentScrub = undefined
             }
-          }, COMMIT_DEBOUNCE_MS),
+          }, COMMIT_DEBOUNCE_MS) as unknown as number,
         }
       }
     }

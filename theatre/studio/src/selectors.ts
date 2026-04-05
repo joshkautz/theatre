@@ -3,8 +3,10 @@ import type Sequence from '@tomorrowevening/theatre-core/sequences/Sequence'
 import type SheetObject from '@tomorrowevening/theatre-core/sheetObjects/SheetObject'
 import type Sheet from '@tomorrowevening/theatre-core/sheets/Sheet'
 import {val} from '@tomorrowevening/theatre-dataverse'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-dataverse/src/types'
-import {isSheet, isSheetObject} from '@tomorrowevening/theatre-shared/instanceTypes'
+import {
+  isSheet,
+  isSheetObject,
+} from '@tomorrowevening/theatre-shared/instanceTypes'
 import type {SheetId} from '@tomorrowevening/theatre-shared/utils/ids'
 import {uniq} from 'lodash-es'
 import getStudio from './getStudio'
@@ -66,7 +68,7 @@ export const getSelectedInstanceOfSheetId = (
 }
 
 function keys<T extends object>(obj: T): Exclude<keyof T, symbol | number>[] {
-  return Object.keys(obj) as $IntentionalAny
+  return Object.keys(obj) as Exclude<keyof T, symbol | number>[]
 }
 
 /**

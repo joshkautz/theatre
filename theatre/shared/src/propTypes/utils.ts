@@ -36,7 +36,7 @@ export function getPropConfigByPath(
   const sub =
     parentConf.type === 'enum'
       ? parentConf.cases[key]
-      : (parentConf as $IntentionalAny).props[key]
+      : (parentConf as {props: Record<string, PropTypeConfig>}).props[key]
 
   return getPropConfigByPath(sub, rest)
 }

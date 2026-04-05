@@ -4,10 +4,7 @@ import type {
   UIPanelId,
 } from '@tomorrowevening/theatre-shared/utils/ids'
 import SimpleCache from '@tomorrowevening/theatre-shared/utils/SimpleCache'
-import type {
-  $IntentionalAny,
-  StrictRecord,
-} from '@tomorrowevening/theatre-shared/utils/types'
+import type {StrictRecord} from '@tomorrowevening/theatre-shared/utils/types'
 import type {Studio} from './Studio'
 import type {CreatePaneOpts, PaneInstance} from './TheatreStudio'
 import type {PanelPosition} from './store/types'
@@ -94,7 +91,7 @@ export default class PaneManager {
           const instance = prism.memo(
             `instance-${instanceDescriptor.instanceId}`,
             () => {
-              const inst: PaneInstance<$IntentionalAny> = {
+              const inst: PaneInstance<string> = {
                 extensionId,
                 instanceId,
                 definition,

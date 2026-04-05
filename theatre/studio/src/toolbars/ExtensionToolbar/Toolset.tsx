@@ -1,7 +1,9 @@
 import didYouMean from '@tomorrowevening/theatre-shared/utils/didYouMean'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import userReadableTypeOfValue from '@tomorrowevening/theatre-shared/utils/userReadableTypeOfValue'
-import type {ToolConfig, ToolsetConfig} from '@tomorrowevening/theatre-studio/TheatreStudio'
+import type {
+  ToolConfig,
+  ToolsetConfig,
+} from '@tomorrowevening/theatre-studio/TheatreStudio'
 import React from 'react'
 import IconButton from './tools/IconButton'
 import Switch from './tools/Switch'
@@ -32,7 +34,9 @@ const toolByType: {
 function getToolByType<Type extends ToolConfig['type']>(
   type: Type,
 ): React.FC<{config: Extract<ToolConfig, {type: Type}>}> {
-  return toolByType[type] as $IntentionalAny
+  return toolByType[type] as React.FC<{
+    config: Extract<ToolConfig, {type: Type}>
+  }>
 }
 
 const Tool: React.FC<{config: ToolConfig}> = ({config}) => {

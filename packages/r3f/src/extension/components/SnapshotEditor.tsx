@@ -13,7 +13,6 @@ import styled, {createGlobalStyle, StyleSheetManager} from 'styled-components'
 import type {ISheet} from '@tomorrowevening/theatre-core'
 import useSnapshotEditorCamera from './useSnapshotEditorCamera'
 import {getEditorSheet, getEditorSheetObject} from '../editorStuff'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import {InfiniteGridHelper} from '../InfiniteGridHelper'
 import {DragDetectorProvider} from './DragDetector'
 import ReferenceWindow from './ReferenceWindow/ReferenceWindow'
@@ -156,9 +155,9 @@ const SnapshotEditor: React.FC<{paneId: string}> = (props) => {
     // We'll try to set the current selection to the nearest sheet _if_ at least one object
     // belonging to R3F was selected previously.
     const obj: undefined | BaseSheetObjectType = studio.selection.find(
-      (sheetOrObject) =>
-        allRegisteredObjects.has(sheetOrObject as $IntentionalAny),
-    ) as $IntentionalAny
+      (sheetOrObject): sheetOrObject is BaseSheetObjectType =>
+        allRegisteredObjects.has(sheetOrObject as BaseSheetObjectType),
+    )
 
     if (obj) {
       studio.setSelection([obj.sheet])

@@ -1,6 +1,5 @@
 import {pointerToPrism, val} from '@tomorrowevening/theatre-dataverse'
 import {defer} from '@tomorrowevening/theatre-shared/utils/defer'
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
 import getStudio from './getStudio'
 import type {UpdateCheckerResponse} from './store/types'
 
@@ -93,7 +92,7 @@ function isValidUpdateCheckerResponse(
   json: unknown,
 ): json is UpdateCheckerResponse {
   if (typeof json !== 'object') return false
-  const obj = json as $IntentionalAny
+  const obj = json as Record<string, unknown>
   if (typeof obj['hasUpdates'] !== 'boolean') return false
   // could use a runtime type checker but not important yet
   return (

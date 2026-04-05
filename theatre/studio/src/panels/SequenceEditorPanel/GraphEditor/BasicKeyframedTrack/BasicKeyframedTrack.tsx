@@ -6,7 +6,7 @@ import type SheetObject from '@tomorrowevening/theatre-core/sheetObjects/SheetOb
 import type {PathToProp} from '@tomorrowevening/theatre-shared/utils/addresses'
 import type {SequenceTrackId} from '@tomorrowevening/theatre-shared/utils/ids'
 import {createStudioSheetItemKey} from '@tomorrowevening/theatre-shared/utils/ids'
-import type {$IntentionalAny, VoidFn} from '@tomorrowevening/theatre-shared/utils/types'
+import type {VoidFn} from '@tomorrowevening/theatre-shared/utils/types'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import React, {useMemo, useRef, useState} from 'react'
 import type {SequenceEditorPanelLayout} from '@tomorrowevening/theatre-studio/panels/SequenceEditorPanel/layout/layout'
@@ -87,9 +87,7 @@ const BasicKeyframedTrack: React.VFC<{
       }
     }, [trackData.keyframes])
 
-    const cachedExtremumSpace = useRef<ExtremumSpace>(
-      undefined as $IntentionalAny,
-    )
+    const cachedExtremumSpace = useRef<ExtremumSpace>(undefined!)
     if (!areExtremumsLocked) {
       cachedExtremumSpace.current = extremumSpace
     }

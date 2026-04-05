@@ -1,5 +1,3 @@
-import type {$IntentionalAny} from './types'
-
 /**
  * A basic cache
  */
@@ -17,7 +15,7 @@ export default class SimpleCache {
    */
   get<T>(key: string, producer: () => T): T {
     if (this.has(key)) {
-      return this._values[key] as $IntentionalAny
+      return this._values[key] as T
     } else {
       const cachedValue = producer()
       this._values[key] = cachedValue
