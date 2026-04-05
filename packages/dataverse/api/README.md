@@ -178,7 +178,7 @@ Returns whether `d` is a prism.
 
 | Name | Type |
 | :------ | :------ |
-| `d` | `any` |
+| `d` | `unknown` |
 
 #### Returns
 

@@ -51,7 +51,7 @@ export type PointerType<O> = {
  * The Pointer type is quite tricky because it doesn't play well with `any` and other inexact types.
  * Here is an example that one would expect to work, but currently doesn't:
  * ```ts
- * declare function expectAnyPointer(pointer: Pointer<any>): void
+ * declare function expectAnyPointer(pointer: Pointer<unknown>): void
  *
  * expectAnyPointer(null as Pointer<{}>) // this shows as a type error because Pointer<{}> is not assignable to Pointer<any>, even though it should
  * ```

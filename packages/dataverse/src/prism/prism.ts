@@ -841,7 +841,7 @@ class ColdScope implements PrismScope {
   memo<T>(
     key: string,
     fn: () => T,
-    deps: any[] | readonly any[] | undefined,
+    deps: unknown[] | readonly unknown[] | undefined,
   ): T {
     return fn()
   }
