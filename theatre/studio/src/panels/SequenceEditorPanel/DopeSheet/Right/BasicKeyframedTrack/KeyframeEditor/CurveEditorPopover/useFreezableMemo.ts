@@ -10,7 +10,7 @@ import {useMemo, useRef, useState} from 'react'
  */
 export function useFreezableMemo<T>(
   fn: (setFreeze: (isFrozen: boolean) => void) => T,
-  deps: any[],
+  deps: unknown[],
 ): T {
   const [isFrozen, setFreeze] = useState<boolean>(false)
   const freezableDeps = useRef(deps)

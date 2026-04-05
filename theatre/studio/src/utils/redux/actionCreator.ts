@@ -1,13 +1,8 @@
-import type {$IntentionalAny} from '@tomorrowevening/theatre-shared/utils/types'
-
 function identity<T>(a: T) {
   return a
 }
 
-interface Transformer<
-  Input extends $IntentionalAny,
-  Output extends $IntentionalAny,
-> {
+interface Transformer<Input, Output> {
   (input: Input): Output
 }
 
@@ -21,9 +16,7 @@ interface ActionCreatorCreator {
     (input: Input): {type: SubString<ActionType>; payload: Payload}
     type: SubString<ActionType>
     ActionType: {type: SubString<ActionType>; payload: Payload}
-    is: (
-      o: $IntentionalAny,
-    ) => o is {type: SubString<ActionType>; payload: Payload}
+    is: (o: unknown) => o is {type: SubString<ActionType>; payload: Payload}
   }
 
   <ActionType extends string>(actionType: SubString<ActionType>): {
@@ -40,19 +33,22 @@ interface ActionCreatorCreator {
  * only that you can query the type of the action from the resulting
  * action creator.
  */
-const actionCreator: ActionCreatorCreator = (
+const actionCreator: ActionCreatorCreator = ((
   actionType: string,
-  transformer: $IntentionalAny = identity,
+  transformer: Transformer<unknown, unknown> = identity,
 ) => {
-  const originalActionCreator: $IntentionalAny = (
-    payload: $IntentionalAny,
-  ) => ({type: actionType, payload: transformer(payload)})
+  const originalActionCreator = ((payload: unknown) => ({
+    type: actionType,
+    payload: transformer(payload),
+  })) as unknown as Record<string, unknown> & ((...args: unknown[]) => unknown)
 
   originalActionCreator.type = actionType
-  originalActionCreator.is = (o: $IntentionalAny) =>
-    o && o.type && o.type === actionType
+  originalActionCreator.is = (o: unknown) => {
+    const action = o as Record<string, unknown> | null | undefined
+    return !!action && !!action.type && action.type === actionType
+  }
 
   return originalActionCreator
-}
+}) as unknown as ActionCreatorCreator
 
 export default actionCreator

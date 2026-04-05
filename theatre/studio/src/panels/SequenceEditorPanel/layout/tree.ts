@@ -234,8 +234,10 @@ export const calculateSequenceEditorTree = (
       // Convert PointableSet to array
       const subSequences: Array<SequenceEditorTree_SubSequence['subSequence']> =
         Object.values(subSequenceSet.byId || {})
-          .filter((val): val is any => val !== undefined)
-          .map((subSequence: any) => subSequence)
+          .filter(
+            (val): val is SequenceEditorTree_SubSequence['subSequence'] =>
+              val !== undefined,
+          )
           .sort((a, b) => a.position - b.position)
 
       for (const subSequence of subSequences) {

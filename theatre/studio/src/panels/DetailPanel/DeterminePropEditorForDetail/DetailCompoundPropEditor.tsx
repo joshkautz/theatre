@@ -110,17 +110,19 @@ const SubProps = styled.div<{depth: number; lastSubIsComposite: boolean}>`
   /* padding: ${(props) => (props.lastSubIsComposite ? 0 : '4px')} 0; */
 `
 
-const isVectorProp = memoizeFn((propConfig: PropTypeConfig_Compound<any>) => {
-  const props = Object.entries(propConfig.props)
+const isVectorProp = memoizeFn(
+  (propConfig: PropTypeConfig_Compound<$IntentionalAny>) => {
+    const props = Object.entries(propConfig.props)
 
-  return (
-    props.length <= 3 &&
-    props.every(
-      ([name, conf]) =>
-        conf.type === 'number' && ['x', 'y', 'z'].includes(name),
+    return (
+      props.length <= 3 &&
+      props.every(
+        ([name, conf]) =>
+          conf.type === 'number' && ['x', 'y', 'z'].includes(name),
+      )
     )
-  )
-})
+  },
+)
 
 function VectorComponentEditor<TPropTypeConfig extends PropTypeConfig_Number>({
   propConfig,
@@ -156,7 +158,7 @@ const InputContainer = styled.div`
 `
 
 export type ICompoundPropDetailEditorProps<
-  TPropTypeConfig extends PropTypeConfig_Compound<any>,
+  TPropTypeConfig extends PropTypeConfig_Compound<$IntentionalAny>,
 > = {
   propConfig: TPropTypeConfig
   pointerToProp: Pointer<TPropTypeConfig['valueType']>
@@ -165,7 +167,7 @@ export type ICompoundPropDetailEditorProps<
 }
 
 function DetailCompoundPropEditor<
-  TPropTypeConfig extends PropTypeConfig_Compound<any>,
+  TPropTypeConfig extends PropTypeConfig_Compound<$IntentionalAny>,
 >({
   pointerToProp,
   obj,

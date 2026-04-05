@@ -1,7 +1,10 @@
 import type {SequenceEditorTree_SubSequence} from '@tomorrowevening/theatre-studio/panels/SequenceEditorPanel/layout/tree'
 import type {Pointer} from '@tomorrowevening/theatre-dataverse'
 import {val} from '@tomorrowevening/theatre-dataverse'
-import type {SequenceSubSequenceId} from '@tomorrowevening/theatre-shared/utils/ids'
+import type {
+  SequenceSubSequenceId,
+  SheetId,
+} from '@tomorrowevening/theatre-shared/utils/ids'
 import React, {useMemo, useState} from 'react'
 import styled from 'styled-components'
 import type {SequenceEditorPanelLayout} from '@tomorrowevening/theatre-studio/panels/SequenceEditorPanel/layout/layout'
@@ -635,7 +638,7 @@ const SubSequenceBar: React.FC<{
           dur =
             val(
               project.pointers.historic.sheetsById[
-                leaf.subSequence.sheetId as any
+                leaf.subSequence.sheetId as unknown as SheetId
               ].sequence.length,
             ) ?? val(layoutP.sheet).getSequence().length
         } catch (e) {
@@ -797,8 +800,9 @@ const SubSequenceBar: React.FC<{
       const project = projects[leaf.sheet.address.projectId]
       duration =
         val(
-          project.pointers.historic.sheetsById[leaf.subSequence.sheetId as any]
-            .sequence.length,
+          project.pointers.historic.sheetsById[
+            leaf.subSequence.sheetId as unknown as SheetId
+          ].sequence.length,
         ) ?? val(layoutP.sheet).getSequence().length
     } catch (e) {
       // Fallback to current sequence length if we can't get the referenced sequence

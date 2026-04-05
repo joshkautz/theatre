@@ -14,10 +14,9 @@ import {
   encodePathToProp,
 } from '@tomorrowevening/theatre-shared/utils/addresses'
 import type {KeyframeWithPathToPropFromCommonRoot} from '@tomorrowevening/theatre-studio/store/types'
+import type {Keyframe} from '@tomorrowevening/theatre-core/projects/store/types/SheetState_Historic'
 import type Sequence from '@tomorrowevening/theatre-core/sequences/Sequence'
-import type {
-  PropAddress,
-} from '@tomorrowevening/theatre-shared/utils/addresses'
+import type {PropAddress} from '@tomorrowevening/theatre-shared/utils/addresses'
 import type SheetObject from '@tomorrowevening/theatre-core/sheetObjects/SheetObject'
 import {
   getPropConfigByPath,
@@ -119,11 +118,13 @@ function pasteKeyframesSheet(
 
       if (!sheetObject) continue
 
-      const tracksByObject = (tracksByObjectPrism as any)?.[objectKey]
+      const tracksByObject = (tracksByObjectPrism as Record<string, unknown>)?.[
+        objectKey
+      ] as Record<string, unknown> | undefined
       const pathToPropEncoded = encodePathToProp(relativePathToProp)
-      const maybeTrackId = (tracksByObject?.trackIdByPropPath as any)?.[
-        pathToPropEncoded
-      ]
+      const maybeTrackId = (
+        tracksByObject?.trackIdByPropPath as Record<string, unknown> | undefined
+      )?.[pathToPropEncoded] as string | undefined
 
       placeableKeyframes.push({
         keyframe,
@@ -189,9 +190,11 @@ function pasteKeyframesObjectOrCompound(
           if (isPropConfigComposite(conf)) continue // Skip compounds, only simple props are sequencable
           const fullPath = path
           const fullPathEncoded = encodePathToProp(fullPath)
-          const maybeTrackId = (trackRecords?.trackIdByPropPath as any)?.[
-            fullPathEncoded
-          ]
+          const maybeTrackId = (
+            trackRecords?.trackIdByPropPath as
+              | Record<string, unknown>
+              | undefined
+          )?.[fullPathEncoded] as string | undefined
 
           // Add to targets (even if trackId is missing)
           for (const {keyframe} of keyframes) {
@@ -207,14 +210,17 @@ function pasteKeyframesObjectOrCompound(
     }
   } else {
     // Relative paths mode
-    const trackIdByPropPathAny = (trackRecords?.trackIdByPropPath || {}) as any
+    const trackIdByPropPathAny = (trackRecords?.trackIdByPropPath ||
+      {}) as Record<string, unknown>
     const rootPath =
       viewModel.type === 'propWithChildren' ? viewModel.pathToProp : []
 
     for (const {keyframe, pathToProp: relativePathToProp} of keyframes) {
       const fullPath = [...rootPath, ...relativePathToProp]
       const pathToPropEncoded = encodePathToProp(fullPath)
-      const maybeTrackId = trackIdByPropPathAny[pathToPropEncoded]
+      const maybeTrackId = trackIdByPropPathAny[pathToPropEncoded] as
+        | string
+        | undefined
 
       placeableKeyframes.push({
         keyframe,
@@ -290,8 +296,8 @@ function pasteKeyframesToTargets(
   })
 }
 
-function earliestKeyframe(keyframes: any[]) {
-  let curEarliest: any = null
+function earliestKeyframe(keyframes: Keyframe[]) {
+  let curEarliest: Keyframe | null = null
   for (const keyframe of keyframes) {
     if (curEarliest === null || keyframe.position < curEarliest.position) {
       curEarliest = keyframe

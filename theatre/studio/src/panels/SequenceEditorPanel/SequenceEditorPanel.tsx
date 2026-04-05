@@ -11,6 +11,7 @@ import {prism, val} from '@tomorrowevening/theatre-dataverse'
 import React, {useState, useCallback, useRef} from 'react'
 import styled from 'styled-components'
 import {types} from '@tomorrowevening/theatre-core'
+import type {UnknownShorthandCompoundProps} from '@tomorrowevening/theatre-core/propTypes'
 
 import DopeSheet from './DopeSheet/DopeSheet'
 import GraphEditor from './GraphEditor/GraphEditor'
@@ -41,7 +42,11 @@ import {
   TitleBar_Piece,
   TitleBar_Punctuation,
 } from '@tomorrowevening/theatre-studio/panels/BasePanel/common'
-import type {UIPanelId} from '@tomorrowevening/theatre-shared/utils/ids'
+import type {
+  UIPanelId,
+  SequenceMarkerId,
+  SequenceEventId,
+} from '@tomorrowevening/theatre-shared/utils/ids'
 import {usePresenceListenersOnRootElement} from '@tomorrowevening/theatre-studio/uiComponents/usePresence'
 import SequenceDataViewer from './SequenceDataViewer'
 import type {SequenceDataViewerRef} from './SequenceDataViewer'
@@ -187,7 +192,7 @@ const Content: React.VFC<{}> = () => {
 
   // Attach Audio Popup state
   const [showAttachAudioPopup, setShowAttachAudioPopup] = useState(false)
-  const [currentSheet, setCurrentSheet] = useState<any>(null)
+  const [currentSheet, setCurrentSheet] = useState<Sheet | null>(null)
   const [audioStartTime, setAudioStartTime] = useState<number>(0)
 
   // SheetModal ref for controlling it from the Start Menu
@@ -197,12 +202,12 @@ const Content: React.VFC<{}> = () => {
   const sheetObjectModalRef = useRef<SheetObjectModalRef>(null)
 
   // Store for tracking object properties to prevent overwrites
-  const objectPropertiesStore = useRef<Map<string, Record<string, any>>>(
-    new Map(),
-  )
+  const objectPropertiesStore = useRef<
+    Map<string, UnknownShorthandCompoundProps>
+  >(new Map())
 
   // Current sheet ref to access sheet info from handlers
-  const currentSheetRef = useRef<any>(null)
+  const currentSheetRef = useRef<Sheet | null>(null)
 
   const handleDataViewerClear = useCallback(() => {
     sequenceDataViewerRef.current?.clearData()
@@ -444,7 +449,7 @@ const Content: React.VFC<{}> = () => {
       name: string
       key: string
       type: string
-      value: any
+      value: unknown
       min?: number
       max?: number
       step?: number
@@ -453,7 +458,7 @@ const Content: React.VFC<{}> = () => {
         const currentSheet = currentSheetRef.current
         if (currentSheet) {
           // Build the prop configuration based on type
-          let propConfig: any
+          let propConfig: unknown
 
           switch (objectData.type) {
             case 'number':
@@ -462,7 +467,10 @@ const Content: React.VFC<{}> = () => {
                 objectData.max !== undefined ||
                 objectData.step !== undefined
               ) {
-                const rangeOptions: any = {}
+                const rangeOptions: {
+                  range?: [number, number]
+                  nudgeMultiplier?: number
+                } = {}
                 if (
                   objectData.min !== undefined &&
                   objectData.max !== undefined
@@ -472,19 +480,26 @@ const Content: React.VFC<{}> = () => {
                 if (objectData.step !== undefined) {
                   rangeOptions.nudgeMultiplier = objectData.step
                 }
-                propConfig = types.number(objectData.value, rangeOptions)
+                propConfig = types.number(
+                  objectData.value as number,
+                  rangeOptions,
+                )
               } else {
-                propConfig = types.number(objectData.value)
+                propConfig = types.number(objectData.value as number)
               }
               break
             case 'string':
-              propConfig = types.string(objectData.value)
+              propConfig = types.string(objectData.value as string)
               break
             case 'boolean':
-              propConfig = types.boolean(objectData.value)
+              propConfig = types.boolean(objectData.value as boolean)
               break
             case 'rgba':
-              propConfig = types.rgba(objectData.value)
+              propConfig = types.rgba(
+                objectData.value as
+                  | {r: number; g: number; b: number; a: number}
+                  | undefined,
+              )
               break
             case 'compound':
               propConfig = objectData.value
@@ -503,7 +518,8 @@ const Content: React.VFC<{}> = () => {
           let existingProps = objectPropertiesStore.current.get(objectKey) || {}
 
           // Add the new property to existing properties
-          existingProps[objectData.key] = propConfig
+          existingProps[objectData.key] =
+            propConfig as UnknownShorthandCompoundProps[string]
 
           // Update the store
           objectPropertiesStore.current.set(objectKey, existingProps)
@@ -692,7 +708,7 @@ const Content: React.VFC<{}> = () => {
               stateEditors.studio.historic.projects.stateByProjectId.stateBySheetId.sequenceEditor.removeMarker(
                 {
                   sheetAddress: sheet.address,
-                  markerId: markerId as any,
+                  markerId: markerId as SequenceMarkerId,
                 },
               )
             })
@@ -781,7 +797,7 @@ const Content: React.VFC<{}> = () => {
               stateEditors.studio.historic.projects.stateByProjectId.stateBySheetId.sequenceEditor.removeEvent(
                 {
                   sheetAddress: sheet.address,
-                  eventId: eventId as any,
+                  eventId: eventId as SequenceEventId,
                 },
               )
             })

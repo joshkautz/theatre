@@ -25,8 +25,11 @@ export async function analyzeAudioFile(
 
   try {
     // Create audio context
-    const audioContext = new (window.AudioContext ||
-      (window as any).webkitAudioContext)()
+    const AudioContextConstructor =
+      window.AudioContext ||
+      (window as unknown as Record<string, typeof AudioContext>)
+        .webkitAudioContext
+    const audioContext = new AudioContextConstructor()
 
     // Read file as array buffer
     const arrayBuffer = await file.arrayBuffer()

@@ -20,7 +20,7 @@ type SheetObjectModalProps = {
     name: string
     key: string
     type: PropType
-    value: any
+    value: unknown
     min?: number
     max?: number
     step?: number
@@ -432,7 +432,15 @@ const SheetObjectModal = forwardRef<SheetObjectModalRef, SheetObjectModalProps>(
       if (!trimmedName || !trimmedKey) return
 
       const parsedValue = parseValue(value, type)
-      const objectData: any = {
+      const objectData: {
+        name: string
+        key: string
+        type: PropType
+        value: unknown
+        min?: number
+        max?: number
+        step?: number
+      } = {
         name: trimmedName,
         key: trimmedKey,
         type,

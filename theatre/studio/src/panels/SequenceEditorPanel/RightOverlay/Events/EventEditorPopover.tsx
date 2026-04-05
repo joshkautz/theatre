@@ -141,7 +141,7 @@ const EventEditorPopover: React.FC<{
           tempTransaction = undefined
         }
         // Try to parse as JSON, fallback to string
-        let parsedValue: any = newValue
+        let parsedValue: unknown = newValue
         try {
           if (newValue.trim() !== '') {
             parsedValue = JSON.parse(newValue)
@@ -173,7 +173,7 @@ const EventEditorPopover: React.FC<{
           tempTransaction = undefined
         }
         // Try to parse as JSON, fallback to string
-        let parsedValue: any = newValue
+        let parsedValue: unknown = newValue
         try {
           if (newValue.trim() !== '') {
             parsedValue = JSON.parse(newValue)

@@ -4,6 +4,10 @@ import type {
   SequenceEditorTree_PropWithChildren,
   SequenceEditorTree_PrimitiveProp,
 } from './tree'
+import type {
+  WithoutSheetInstance,
+  SheetAddress,
+} from '@tomorrowevening/theatre-shared/utils/addresses'
 import {setCollapsedSheetItem} from '@tomorrowevening/theatre-studio/panels/SequenceEditorPanel/DopeSheet/setCollapsedSheetObjectOrCompoundProp'
 
 /**
@@ -74,7 +78,7 @@ function storePropsCollapsedState(
   props: Array<
     SequenceEditorTree_PropWithChildren | SequenceEditorTree_PrimitiveProp
   >,
-  sheetAddress: any,
+  sheetAddress: WithoutSheetInstance<SheetAddress>,
 ): void {
   props.forEach((prop) => {
     if (prop.type === 'propWithChildren') {
@@ -123,7 +127,7 @@ function restorePropsCollapsedState(
   props: Array<
     SequenceEditorTree_PropWithChildren | SequenceEditorTree_PrimitiveProp
   >,
-  sheetAddress: any,
+  sheetAddress: WithoutSheetInstance<SheetAddress>,
 ): void {
   props.forEach((prop) => {
     if (prop.type === 'propWithChildren') {
@@ -162,7 +166,7 @@ function expandMatchingProps(
     SequenceEditorTree_PropWithChildren | SequenceEditorTree_PrimitiveProp
   >,
   searchTerm: string,
-  sheetAddress: any,
+  sheetAddress: WithoutSheetInstance<SheetAddress>,
 ): void {
   props.forEach((prop) => {
     if (prop.type === 'propWithChildren') {
