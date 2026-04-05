@@ -12,9 +12,9 @@ type DeriveAll<T> = Prism<
 
 export type $<T> = Prism<T> | Pointer<T>
 
-function deriveAllD<T extends [...$<any>[]]>(obj: T): DeriveAll<T>
-function deriveAllD<T extends Record<string, $<any>>>(obj: T): DeriveAll<T>
-function deriveAllD<T extends Record<string, $<any>> | $<any>[]>(
+function deriveAllD<T extends [...$<unknown>[]]>(obj: T): DeriveAll<T>
+function deriveAllD<T extends Record<string, $<unknown>>>(obj: T): DeriveAll<T>
+function deriveAllD<T extends Record<string, $<unknown>> | $<unknown>[]>(
   obj: T,
 ): DeriveAll<T> {
   return prism(() => {
@@ -27,7 +27,7 @@ function deriveAllD<T extends Record<string, $<any>> | $<any>[]>(
     } else {
       const values: Record<string, unknown> = {}
       for (const k in obj) {
-        values[k] = val((obj as Record<string, $<any>>)[k])
+        values[k] = val((obj as Record<string, $<unknown>>)[k])
       }
       return values
     }

@@ -217,8 +217,8 @@ const AT_TEST_HELPERS_RE = /^\s*(at|[^@]+@).+test\-helpers.+/gm
 
 /** `TestError` removes the invariant line & test-helpers from the `Error.stack` */
 class LoggerTestError extends Error {
-  found: any
-  constructor(message: string, found?: any) {
+  found: unknown
+  constructor(message: string, found?: unknown) {
     super(message)
     if (found) {
       this.found = found

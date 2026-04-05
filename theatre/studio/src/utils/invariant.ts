@@ -10,9 +10,9 @@ type AllowedMessageTypes = string | number | object
  * stack trace and error message.
  */
 export function invariant(
-  shouldBeTruthy: any,
+  shouldBeTruthy: unknown,
   message: (() => AllowedMessageTypes) | AllowedMessageTypes,
-  butFoundInstead?: any,
+  butFoundInstead?: unknown,
 ): asserts shouldBeTruthy {
   if (!shouldBeTruthy) {
     const isFoundArgGiven = arguments.length > 2
@@ -32,7 +32,7 @@ export function invariant(
  */
 export function invariantThrow(
   message: (() => AllowedMessageTypes) | AllowedMessageTypes,
-  butFoundInstead?: any,
+  butFoundInstead?: unknown,
 ): never {
   const isFoundArgGiven = arguments.length > 1
   const prefix = devStringify(
@@ -80,8 +80,8 @@ const AT_ASSORTED_HELPERS_RE =
  * which cleans up the stack trace, making it more developer friendly to read.
  */
 class InvariantError extends Error {
-  found: any
-  constructor(message: string, found?: any) {
+  found: unknown
+  constructor(message: string, found?: unknown) {
     super(message)
     if (found !== undefined) {
       this.found = found

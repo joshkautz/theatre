@@ -248,7 +248,11 @@ export interface ISequence {
    */
   listen(
     eventName: string,
-    listener: (event: {name: string; position: number; value?: any}) => void,
+    listener: (event: {
+      name: string
+      position: number
+      value?: unknown
+    }) => void,
   ): void
 
   /**
@@ -266,7 +270,11 @@ export interface ISequence {
    */
   unlisten(
     eventName: string,
-    listener: (event: {name: string; position: number; value?: any}) => void,
+    listener: (event: {
+      name: string
+      position: number
+      value?: unknown
+    }) => void,
   ): void
 
   /**
@@ -507,7 +515,7 @@ export default class TheatreSequence implements ISequence {
     privateAPI(this).position = position
   }
 
-  __experimental_getKeyframes(prop: Pointer<any>): Keyframe[] {
+  __experimental_getKeyframes(prop: Pointer<{}>): Keyframe[] {
     return privateAPI(this).getKeyframesOfSimpleProp(prop)
   }
 
@@ -625,14 +633,22 @@ export default class TheatreSequence implements ISequence {
 
   listen(
     eventName: string,
-    listener: (event: {name: string; position: number; value?: any}) => void,
+    listener: (event: {
+      name: string
+      position: number
+      value?: unknown
+    }) => void,
   ): void {
     return privateAPI(this).listen(eventName, listener)
   }
 
   unlisten(
     eventName: string,
-    listener: (event: {name: string; position: number; value?: any}) => void,
+    listener: (event: {
+      name: string
+      position: number
+      value?: unknown
+    }) => void,
   ): void {
     return privateAPI(this).unlisten(eventName, listener)
   }

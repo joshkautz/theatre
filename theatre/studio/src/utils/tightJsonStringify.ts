@@ -20,8 +20,10 @@
  * Also, see the examples in [`./tightJsonStringify.test.ts`](./tightJsonStringify.test.ts)
  */
 export function tightJsonStringify(
-  obj: any,
-  replacer?: ((this: any, key: string, value: any) => any) | undefined,
+  obj: unknown,
+  replacer?:
+    | ((this: unknown, key: string, value: unknown) => unknown)
+    | undefined,
 ) {
   return JSON.stringify(obj, replacer, 2)
     .replace(/^([\{\[])\n (\s+)/, '$1$2')

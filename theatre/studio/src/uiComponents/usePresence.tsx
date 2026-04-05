@@ -151,7 +151,10 @@ const PRESENCE_ITEM_DATA_ATTR = 'data-pi-key'
 export default function usePresence(key: StudioSheetItemKey | undefined): {
   attrs: {[attr: `data-${string}`]: string}
   flag: PresenceFlag | undefined
-  useRelations(getRelations: () => Array<FlagRelationConfig>, deps: any[]): void
+  useRelations(
+    getRelations: () => Array<FlagRelationConfig>,
+    deps: unknown[],
+  ): void
 } {
   const presenceInternal = React.useContext(presenceInternalCtx)
   const flag = presenceInternal.usePresenceFlag(key)
@@ -176,7 +179,7 @@ export function usePresenceListenersOnRootElement(
   const logger = useLogger('PresenceListeners')
   useEffect(() => {
     // keep track of current primary hover to make sure we make changes to presence distinct
-    let currentItemKeyUserHover: any
+    let currentItemKeyUserHover: string | null | undefined
     if (!target) return
     const onMouseOver = (event: MouseEvent) => {
       if (event.target instanceof Node) {

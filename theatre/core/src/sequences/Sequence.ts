@@ -45,7 +45,7 @@ export type IPlaybackDirection =
 export type SequenceEventListener = (event: {
   name: string
   position: number
-  value?: any
+  value?: unknown
 }) => void
 
 const possibleDirections = [
@@ -225,7 +225,7 @@ export default class Sequence implements PointerToPrismProvider {
   private _triggerEvent(event: {
     name: string
     position: number
-    value?: any
+    value?: unknown
   }): void {
     const listeners = this._eventListeners.get(event.name)
     if (listeners) {
@@ -279,7 +279,7 @@ export default class Sequence implements PointerToPrismProvider {
             referencedSequence &&
             '_gotoPositionWithoutPausing' in referencedSequence
           ) {
-            ;(referencedSequence as any)._gotoPositionWithoutPausing(
+            ;(referencedSequence as Sequence)._gotoPositionWithoutPausing(
               scaledPosition,
             )
           }
@@ -358,7 +358,7 @@ export default class Sequence implements PointerToPrismProvider {
    *
    * Theoretically, this method can be called from inside a prism so it can be reactive.
    */
-  getKeyframesOfSimpleProp<V>(prop: Pointer<any>): Keyframe[] {
+  getKeyframesOfSimpleProp<V>(prop: Pointer<{}>): Keyframe[] {
     const {path, root} = getPointerParts(prop)
 
     if (!isSheetObject(root)) {

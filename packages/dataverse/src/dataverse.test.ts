@@ -725,7 +725,7 @@ describe(`The exhaustive guide to dataverse`, () => {
     test('3.4 - Converting pointers to prisms', () => {
       // So, how does the `val()` function work?
       // Let's look at its implementation:
-      const val = (input: any) => {
+      const val = (input: unknown) => {
         // if the input is a pointer, we'll convert it to a prism and `getValue()` on it
         if (isPointer(input)) {
           return pointerToPrism(input).getValue()
@@ -783,17 +783,17 @@ describe(`The exhaustive guide to dataverse`, () => {
 
       // First, we can cache the prism so that we don't create a new prism every time we call `pointerToPrism()`.
       // This will improve performance and reduce memory usage.
-      const cache = new WeakMap<Pointer<any>, Prism<unknown>>()
+      const cache = new WeakMap<Pointer<unknown>, Prism<unknown>>()
       function pointerToPrismV2<V>(ptr: Pointer<V>): Prism<V> {
         // we'll check whether the pointer is already in the cache
-        const cached = cache.get(ptr as any)
+        const cached = cache.get(ptr as Pointer<unknown>)
         if (cached) {
-          return cached as any
+          return cached as Prism<V>
         }
 
         // if not, we'll create a new prism and cache it
         const p = pointerToPrismV1(ptr)
-        cache.set(ptr as any, p)
+        cache.set(ptr as Pointer<unknown>, p)
         return p
       }
 
@@ -811,9 +811,9 @@ describe(`The exhaustive guide to dataverse`, () => {
 
       // So our implementation can be updated to:
       function pointerToPrismV3<V>(ptr: Pointer<V>): Prism<V> {
-        const cached = cache.get(ptr as any)
+        const cached = cache.get(ptr as Pointer<unknown>)
         if (cached) {
-          return cached as any
+          return cached as Prism<V>
         }
 
         const {root} = getPointerParts(ptr)
@@ -826,7 +826,7 @@ describe(`The exhaustive guide to dataverse`, () => {
         // the prism, rather than us calling `prism()`, and `prism.source` directly. This will allow
         // the implementation to custmoize and possibly optimise how the prism sources its value.
         const pr = root.pointerToPrism(ptr)
-        cache.set(ptr as any, pr)
+        cache.set(ptr as Pointer<unknown>, pr)
         return pr
       }
 
@@ -871,10 +871,13 @@ describe(`The exhaustive guide to dataverse`, () => {
 
       // To make it easy to inspect the state of a prism, we'll create a helper function:
       const prismState = (
-        p: Prism<any>,
+        p: Prism<unknown>,
       ): 'cold' | 'hot:stale' | 'hot:fresh' => {
         // @ts-ignore this is a hack to access the internal state of the prism
-        const internalState = p._state as any
+        const internalState = p._state as {
+          hot: boolean
+          handle: {_isFresh: boolean}
+        }
         return internalState.hot === false
           ? 'cold'
           : internalState.handle._isFresh

@@ -158,7 +158,7 @@ export function useControls<Config extends ControlsAndButtons>(
     () =>
       Object.fromEntries(
         Object.entries(_config).filter(
-          ([key, value]) => (value as any).type !== 'button',
+          ([key, value]) => (value as {type?: string}).type !== 'button',
         ),
       ) as UnknownShorthandCompoundProps,
     [_config],
@@ -168,7 +168,7 @@ export function useControls<Config extends ControlsAndButtons>(
     () =>
       Object.fromEntries(
         Object.entries(_config).filter(
-          ([key, value]) => (value as any).type === 'button',
+          ([key, value]) => (value as {type?: string}).type === 'button',
         ),
       ) as unknown as Buttons,
     [_config],
@@ -253,7 +253,11 @@ export function useControls<Config extends ControlsAndButtons>(
       if (isEqual(newValues, valuesRef.current)) return
 
       valuesRef.current = newValues
-      setValues(newValues as any)
+      setValues(
+        newValues as ISheetObject<
+          OmitMatching<Config, {type: 'button'}>
+        >['value'],
+      )
     })
 
     return unsub
@@ -274,7 +278,11 @@ export function useControls<Config extends ControlsAndButtons>(
         )
       }
 
-      const pointer = getPointer(rootPointer as any)
+      const pointer = getPointer(
+        rootPointer as ISheetObject<
+          OmitMatching<Config, {type: 'button'}>
+        >['props'],
+      )
       if (!isPointer(pointer)) {
         throw new Error(
           `The function passed to $set must return a pointer. Instead, it returned ${pointer}`,
@@ -298,7 +306,11 @@ export function useControls<Config extends ControlsAndButtons>(
         )
       }
 
-      const pointer = getPointer(rootPointer as any)
+      const pointer = getPointer(
+        rootPointer as ISheetObject<
+          OmitMatching<Config, {type: 'button'}>
+        >['props'],
+      )
       if (!isPointer(pointer)) {
         throw new Error(
           `The function passed to $get must return a pointer. Instead, it returned ${pointer}`,

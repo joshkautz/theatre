@@ -15,13 +15,13 @@ type ITheatreLogMeta = Readonly<{
 /** @public configuration type */
 export interface ITheatreConsoleLogger {
   /** ERROR level logs */
-  error(message: string, ...args: any[]): void
+  error(message: string, ...args: unknown[]): void
   /** WARN level logs */
-  warn(message: string, ...args: any[]): void
+  warn(message: string, ...args: unknown[]): void
   /** DEBUG level logs */
-  info(message: string, ...args: any[]): void
+  info(message: string, ...args: unknown[]): void
   /** TRACE level logs */
-  debug(message: string, ...args: any[]): void
+  debug(message: string, ...args: unknown[]): void
 }
 
 /**
@@ -590,7 +590,7 @@ function createConsoleLoggerStyled(
 ): ILogger {
   const includes = {...this.includes, ...this.include(source)}
 
-  const styleArgs: any[] = []
+  const styleArgs: string[] = []
   let prefix = ''
   for (let i = 0; i < source.names.length; i++) {
     const {name, key} = source.names[i]
@@ -666,8 +666,8 @@ function _createConsoleLogger(
   source: ITheatreLogSource,
   includes: {min: TheatreLoggerLevel; dev: boolean; internal: boolean},
   con: ITheatreConsoleLogger,
-  prefix: ReadonlyArray<any>,
-  kapowPrefix: ReadonlyArray<any>,
+  prefix: ReadonlyArray<string>,
+  kapowPrefix: ReadonlyArray<string>,
   named: (name: string, key?: string | number | undefined) => ILogger,
 ) {
   const _HMM = shouldLog(includes, _LoggerLevel._HMM)

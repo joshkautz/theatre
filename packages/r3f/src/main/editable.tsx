@@ -200,7 +200,7 @@ Then you can use it in your JSX like any other editable component. Note the make
 
           const object = objectRef.current!
 
-          const setFromTheatre = (newValues: any) => {
+          const setFromTheatre = (newValues: Record<string, unknown>) => {
             // @ts-ignore
             Object.entries(config[actualType].props).forEach(
               // @ts-ignore
@@ -265,7 +265,7 @@ Then you can use it in your JSX like any other editable component. Note the make
   } & {
     primitive: React.ForwardRefExoticComponent<
       {
-        object: any
+        object: unknown
         theatreKey: string
         visible?: boolean | 'editor'
         additionalProps?: $IntentionalAny
@@ -276,7 +276,7 @@ Then you can use it in your JSX like any other editable component. Note the make
       } & {
         // Have to reproduce the primitive component's props here because we need to
         // lift this index type here to the outside to make auto-complete work
-        [props: string]: any
+        [props: string]: unknown
       }
     >
   }

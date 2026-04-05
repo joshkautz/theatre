@@ -32,12 +32,16 @@ type Vector3 = {
   z: number
 }
 
-function isNumber(value: any) {
+function isNumber(value: unknown): value is number {
   return typeof value === 'number' && isFinite(value)
 }
 
-function isVectorObject(value: any) {
-  return (['x', 'y', 'z'] as const).every((axis) => isNumber(value[axis]))
+function isVectorObject(
+  value: unknown,
+): value is {x: number; y: number; z: number} {
+  if (typeof value !== 'object' || value === null) return false
+  const obj = value as Record<string, unknown>
+  return (['x', 'y', 'z'] as const).every((axis) => isNumber(obj[axis]))
 }
 
 export const createVector = (components?: [number, number, number]) => {
@@ -62,7 +66,7 @@ export const createVectorPropConfig = (
       ? defaultValue
       : // if prop is an array
       Array.isArray(propValue)
-      ? createVector(propValue as any)
+      ? createVector(propValue as [number, number, number])
       : // if prop is a scalar
       isNumber(propValue)
       ? {
@@ -93,8 +97,8 @@ To fix this, make sure the prop is set to either a number, an array of numbers, 
         defaultValue)
     ;(['x', 'y', 'z'] as const).forEach((axis) => {
       // e.g. r3f also accepts prop keys like "scale-x"
-      if (props[`${key}-${axis}` as any])
-        vector[axis] = props[`${key}-${axis}` as any]
+      if (props[`${key}-${axis}`])
+        vector[axis] = props[`${key}-${axis}`] as number
     })
     return vector
   },

@@ -92,7 +92,7 @@ class OrbitControls extends EventDispatcher {
   position0: Vector3
   zoom0: number
   // the target DOM element for key events
-  _domElementKeyEvents: any = null
+  _domElementKeyEvents: HTMLElement | null = null
 
   getPolarAngle: () => number
   getAzimuthalAngle: () => number
@@ -179,7 +179,7 @@ class OrbitControls extends EventDispatcher {
     }
 
     this.stopListenToKeyEvents = (): void => {
-      this._domElementKeyEvents.removeEventListener('keydown', onKeyDown)
+      this._domElementKeyEvents?.removeEventListener('keydown', onKeyDown)
       this._domElementKeyEvents = null
     }
 
@@ -333,7 +333,7 @@ class OrbitControls extends EventDispatcher {
 
     // https://github.com/mrdoob/three.js/issues/20575
     this.connect = (domElement: HTMLElement): void => {
-      if ((domElement as any) === document) {
+      if ((domElement as unknown) === document) {
         console.error(
           'THREE.OrbitControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.',
         )

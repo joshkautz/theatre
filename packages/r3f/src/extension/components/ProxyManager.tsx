@@ -44,7 +44,7 @@ const ProxyManager: FC<ProxyManagerProps> = ({orbitControlsRef}) => {
   const sceneProxy = useMemo(() => sceneSnapshot?.clone(), [sceneSnapshot])
   const [editableProxies, setEditableProxies] = useState<
     {
-      [name in string]?: IEditableProxy<any>
+      [name in string]?: IEditableProxy<Object3D>
     }
   >({})
 
@@ -54,7 +54,7 @@ const ProxyManager: FC<ProxyManagerProps> = ({orbitControlsRef}) => {
       return
     }
 
-    const editableProxies: {[name: string]: IEditableProxy<any>} = {}
+    const editableProxies: {[name: string]: IEditableProxy<Object3D>} = {}
 
     sceneProxy.traverse((object) => {
       if (object.userData.__editable) {
@@ -152,14 +152,16 @@ const ProxyManager: FC<ProxyManagerProps> = ({orbitControlsRef}) => {
             }
             material = new MeshBasicMaterial()
             if (renderMaterials[mesh.id].hasOwnProperty('color')) {
-              material.color = (renderMaterials[mesh.id] as any).color
+              material.color = (
+                renderMaterials[mesh.id] as MeshBasicMaterial
+              ).color
             }
             if (renderMaterials[mesh.id].hasOwnProperty('map')) {
-              material.map = (renderMaterials[mesh.id] as any).map
+              material.map = (renderMaterials[mesh.id] as MeshBasicMaterial).map
             }
             if (renderMaterials[mesh.id].hasOwnProperty('vertexColors')) {
               material.vertexColors = (
-                renderMaterials[mesh.id] as any
+                renderMaterials[mesh.id] as MeshBasicMaterial
               ).vertexColors
             }
             mesh.material = material
@@ -171,14 +173,16 @@ const ProxyManager: FC<ProxyManagerProps> = ({orbitControlsRef}) => {
             }
             material = new MeshPhongMaterial()
             if (renderMaterials[mesh.id].hasOwnProperty('color')) {
-              material.color = (renderMaterials[mesh.id] as any).color
+              material.color = (
+                renderMaterials[mesh.id] as MeshBasicMaterial
+              ).color
             }
             if (renderMaterials[mesh.id].hasOwnProperty('map')) {
-              material.map = (renderMaterials[mesh.id] as any).map
+              material.map = (renderMaterials[mesh.id] as MeshBasicMaterial).map
             }
             if (renderMaterials[mesh.id].hasOwnProperty('vertexColors')) {
               material.vertexColors = (
-                renderMaterials[mesh.id] as any
+                renderMaterials[mesh.id] as MeshBasicMaterial
               ).vertexColors
             }
             mesh.material = material
