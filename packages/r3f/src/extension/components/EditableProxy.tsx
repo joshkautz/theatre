@@ -96,7 +96,7 @@ const EditableProxy: VFC<EditableProxyProps> = ({storeKey, object}) => {
     const sheetObject = editable.sheetObject
     const objectConfig = editable.objectConfig
 
-    const setFromTheatre = (newValues: any) => {
+    const setFromTheatre = (newValues: Record<string, unknown>) => {
       // @ts-ignore
       Object.entries(objectConfig.props).forEach(([key, value]) => {
         // @ts-ignore

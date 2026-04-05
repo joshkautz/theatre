@@ -153,7 +153,7 @@ export type SequenceEvent = {
   /**
    * Optional value associated with the event
    */
-  value?: any
+  value?: unknown
 }
 
 export type SequenceAudioAttachment = {

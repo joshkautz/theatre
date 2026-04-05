@@ -109,7 +109,7 @@ export type StudioHistoricStateSequenceEditorEvent = {
   /**
    * Optional value associated with the event
    */
-  value?: any
+  value?: unknown
 }
 
 /**

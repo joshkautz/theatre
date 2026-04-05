@@ -171,7 +171,7 @@ export const getPointerParts = <_>(
  */
 function pointer<O>(args: {root: {}; path?: Array<string | number>}) {
   const meta: PointerMeta = {
-    root: args.root as $IntentionalAny,
+    root: args.root,
     path: args.path ?? [],
   }
   const pointerKey: WeakPointerKey = {}

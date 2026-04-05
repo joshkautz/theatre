@@ -64,7 +64,7 @@ export default function usePopover(
   opts: Opts | (() => Opts),
   render: () => React.ReactElement,
 ): IPopover {
-  const _debug = (...args: any) => {}
+  const _debug = (..._args: unknown[]) => {}
 
   // want to make sure that we don't close a popover when dragging something (like a curve editor handle)
   // I think this could be improved to handle closing after done dragging, better.

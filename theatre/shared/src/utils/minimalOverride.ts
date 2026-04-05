@@ -81,8 +81,7 @@ export default function minimalOverride<T extends {}>(base: T, override: T): T {
 }
 
 function minimalOverrideObject<T extends {}>(base: T, override: T): T {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const o: any = {}
+  const o = {} as T
   let atLeastOneKeyWasDifferent = false
   const keysOfOverride = Object.keys(override) as Array<keyof T>
   for (const key of keysOfOverride) {

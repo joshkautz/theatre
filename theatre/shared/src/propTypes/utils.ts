@@ -67,7 +67,7 @@ export function valueInProp<PropConfig extends PropTypeConfig_AllSimples>(
  */
 export function isPropConfSequencable(
   conf: PropTypeConfig,
-): conf is Extract<PropTypeConfig, {interpolate: any}> {
+): conf is Extract<PropTypeConfig, {interpolate: unknown}> {
   return !isPropConfigComposite(conf) // now all non-compounds are sequencable
 }
 

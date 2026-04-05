@@ -563,7 +563,7 @@ namespace stateEditors {
                 sheetAddress: SheetAddress
                 eventId: SequenceEventId
                 name: string
-                value?: any
+                value?: unknown
               }) {
                 const currentEventSet = _ensureEvents(options.sheetAddress)
                 const event = currentEventSet.byId[options.eventId]

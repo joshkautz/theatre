@@ -68,8 +68,10 @@ export function usePrism<T>(
   return usePrismInstance(prismRef.current, debugLabel)
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useVal: typeof val = (p: any, debugLabel?: string) => {
+export const useVal: typeof val = (
+  p: Parameters<typeof val>[0],
+  debugLabel?: string,
+) => {
   return usePrism(() => val(p), [p], debugLabel)
 }
 

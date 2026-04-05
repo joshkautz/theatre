@@ -95,6 +95,7 @@ function setupFn(options: ITheatreInternalLoggerOptions) {
 }
 
 function expectLastCalledWith(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fn: jest.MockInstance<any, any[]>,
   includes: TestLoggerIncludes,
 ) {

@@ -98,6 +98,7 @@ export default async function initialiseProjectState(
   // Load markers from disk state into studio state (if studio is available)
   if (onDiskState?.sheetsById) {
     const projectId = project.address.projectId
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     studio.transaction(({stateEditors}: any) => {
       for (const [sheetId, sheetState] of Object.entries(
         onDiskState.sheetsById,

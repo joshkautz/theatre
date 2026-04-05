@@ -5,7 +5,10 @@ import {tightJsonStringify} from './tightJsonStringify'
  * then a developer-readable, command line friendly (not too spaced out, but with
  * enough whitespace to be readable).
  */
-export function devStringify(input: any, indentJSON: boolean = true): string {
+export function devStringify(
+  input: unknown,
+  indentJSON: boolean = true,
+): string {
   try {
     return typeof input === 'string'
       ? input
@@ -15,6 +18,10 @@ export function devStringify(input: any, indentJSON: boolean = true): string {
       ? tightJsonStringify(input)
       : JSON.stringify(input)
   } catch (err) {
-    return input?.name || String(input)
+    return (
+      (input != null && typeof input === 'object' && 'name' in input
+        ? String(input.name)
+        : undefined) || String(input)
+    )
   }
 }

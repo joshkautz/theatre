@@ -24,6 +24,11 @@ export interface IDerivation<V> {
   ): IDerivation<R extends IDerivation<infer T> ? T : R>
 }
 
-export function isDerivation(d: any): d is IDerivation<unknown> {
-  return d && d.isDerivation && d.isDerivation === true
+export function isDerivation(d: unknown): d is IDerivation<unknown> {
+  return !!(
+    d &&
+    typeof d === 'object' &&
+    'isDerivation' in d &&
+    (d as IDerivation<unknown>).isDerivation === true
+  )
 }
